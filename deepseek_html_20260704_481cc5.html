@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Nosbaskets – Sneakers authentiques</title>
+  <meta name="description" content="Votre passerelle sneakers entre la France et le Bénin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <style>
+    /* === STYLES COMPLETS === */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    :root { --blue:#0A3678; --blue-dark:#062452; --white:#FFFFFF; --gray-light:#F5F5F5; --gray-mid:#E0E0E0; --black:#111111; --text:#1A1A1A; --shadow:0 8px 30px rgba(0,0,0,0.08); --radius:16px; --transition:0.3s cubic-bezier(0.4,0,0.2,1); --sidebar-width:260px; --gold:#f5b342; --bg:var(--white); --card-bg:var(--white); --border:var(--gray-mid); }
+    [data-theme="dark"] { --blue:#4a8cff; --blue-dark:#1a5bbf; --white:#1a1a2e; --gray-light:#2a2a3e; --gray-mid:#3a3a5e; --black:#e0e0e0; --text:#e0e0e0; --shadow:0 8px 30px rgba(0,0,0,0.4); --bg:#12121e; --card-bg:#1a1a2e; --border:#3a3a5e; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; transition:background 0.3s, color 0.3s; }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; }
+    button { cursor:pointer; font-family:inherit; border:none; background:none; }
+    input,select,textarea { font-family:inherit; font-size:1rem; background:var(--card-bg); color:var(--text); border:1px solid var(--border); }
+    .container { max-width:1280px; margin:0 auto; padding:0 20px; }
+    .glass { background:rgba(255,255,255,0.15); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.2); border-radius:var(--radius); box-shadow:var(--shadow); }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--gray-light); }
+    ::-webkit-scrollbar-thumb { background:var(--blue); border-radius:4px; }
+
+    /* HEADER - 2 lignes */
+    .header { position:sticky; top:0; z-index:1000; background:rgba(255,255,255,0.85); backdrop-filter:blur(14px); border-bottom:1px solid rgba(0,0,0,0.04); transition:var(--transition); }
+    [data-theme="dark"] .header { background:rgba(18,18,30,0.9); border-bottom:1px solid var(--border); }
+    .header-top { display:flex; align-items:center; justify-content:space-between; height:64px; gap:12px; padding:0 20px; }
+    .logo { display:flex; align-items:center; gap:8px; font-weight:800; font-size:1.2rem; letter-spacing:-0.5px; flex-shrink:0; }
+    .logo img { height:36px; width:auto; object-fit:contain; border-radius:4px; }
+    .logo-text { color:var(--black); }
+    .footer .logo-text { color:var(--white); }
+    .nav-links { display:flex; align-items:center; gap:24px; list-style:none; flex:1; justify-content:center; }
+    .nav-links a { font-weight:500; font-size:0.9rem; color:var(--black); transition:var(--transition); position:relative; white-space:nowrap; }
+    .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--blue); transition:var(--transition); }
+    .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+    .nav-links a:hover { color:var(--blue); }
+    .mobile-toggle { display:none; font-size:1.4rem; color:var(--black); flex-shrink:0; margin-left:4px; }
+    .mobile-toggle:hover { color:var(--blue); }
+    .header-bottom { display:flex; align-items:center; justify-content:center; gap:12px; padding:8px 20px 12px; flex-wrap:wrap; border-top:1px solid rgba(0,0,0,0.04); background:var(--bg); }
+    [data-theme="dark"] .header-bottom { border-top:1px solid var(--border); }
+    .search-bar { display:flex; align-items:center; background:var(--gray-light); border-radius:60px; padding:2px 12px 2px 16px; border:1px solid transparent; transition:var(--transition); max-width:240px; flex:1; min-width:120px; }
+    .search-bar:focus-within { border-color:var(--blue); background:var(--white); }
+    .search-bar input { background:transparent; border:none; outline:none; padding:6px 0; width:100%; font-size:0.85rem; color:var(--text); }
+    .search-bar button { color:#888; font-size:0.9rem; padding:4px; }
+    .header-tools { display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .header-tools button { font-size:1.2rem; color:var(--black); transition:var(--transition); position:relative; padding:4px; }
+    .header-tools button:hover { color:var(--blue); }
+    .cart-badge { position:absolute; top:-4px; right:-6px; background:var(--blue); color:#fff; font-size:0.55rem; font-weight:700; width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .lang-toggle, .theme-toggle, .currency-toggle { font-weight:600; font-size:0.75rem; color:#555; padding:4px 10px; border-radius:20px; background:var(--gray-light); transition:var(--transition); cursor:pointer; border:1px solid var(--border); }
+    .lang-toggle:hover, .theme-toggle:hover, .currency-toggle:hover { background:var(--blue); color:#fff; }
+
+    .flash-band { background:var(--blue); color:#fff; padding:6px 0; text-align:center; font-weight:500; font-size:0.8rem; overflow:hidden; white-space:nowrap; }
+    .flash-band .flash-text { display:inline-block; animation:scrollFlash 25s linear infinite; }
+    @keyframes scrollFlash { 0%{transform:translateX(100%);} 100%{transform:translateX(-100%);} }
+    .hero { padding:40px 0 60px; background:var(--gray-light); position:relative; overflow:hidden; }
+    .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+    .hero-content h1 { font-size:2.8rem; font-weight:800; line-height:1.1; letter-spacing:-1.5px; color:var(--text); margin-bottom:16px; }
+    .hero-content h1 span { color:var(--blue); }
+    .hero-content p { font-size:1.1rem; color:var(--text); max-width:480px; margin-bottom:24px; opacity:0.8; }
+    .hero-buttons { display:flex; flex-wrap:wrap; gap:12px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 28px; border-radius:60px; font-weight:600; font-size:0.95rem; transition:var(--transition); border:2px solid transparent; }
+    .btn-primary { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .btn-primary:hover { background:var(--blue-dark); border-color:var(--blue-dark); transform:translateY(-2px); box-shadow:0 12px 30px rgba(10,54,120,0.25); }
+    .btn-outline { background:transparent; color:var(--text); border-color:var(--border); }
+    .btn-outline:hover { background:var(--text); color:var(--bg); transform:translateY(-2px); }
+    .btn-whatsapp { background:#25D366; color:#fff; border-color:#25D366; }
+    .btn-whatsapp:hover { background:#1da851; border-color:#1da851; transform:translateY(-2px); box-shadow:0 12px 30px rgba(37,211,102,0.3); }
+    .btn-sm { padding:8px 16px; font-size:0.8rem; }
+    .btn-danger { background:#e74c3c; color:#fff; border-color:#e74c3c; }
+    .btn-danger:hover { background:#c0392b; border-color:#c0392b; }
+    .btn-success { background:#2ecc71; color:#fff; border-color:#2ecc71; }
+    .btn-success:hover { background:#27ae60; border-color:#27ae60; }
+
+    .hero-image { display:flex; justify-content:center; align-items:center; position:relative; width:100%; max-width:450px; margin:0 auto; aspect-ratio:4/3; border-radius:var(--radius); overflow:hidden; background:var(--gray-light); box-shadow:0 40px 80px rgba(0,0,0,0.10); }
+    .hero-carousel { width:100%; height:100%; position:relative; }
+    .hero-carousel .slide { position:absolute; inset:0; opacity:0; transition:opacity 1s ease-in-out; background-size:cover; background-position:center; }
+    .hero-carousel .slide.active { opacity:1; }
+    .hero-carousel .slide-placeholder { display:flex; align-items:center; justify-content:center; font-size:4rem; color:var(--blue); background:radial-gradient(circle at 30% 30%, var(--gray-light), #d0d0d0); }
+    .hero-badge { position:absolute; bottom:10px; right:10px; background:var(--card-bg); padding:8px 16px; border-radius:60px; box-shadow:var(--shadow); font-weight:600; font-size:0.75rem; color:var(--blue); display:flex; align-items:center; gap:6px; z-index:10; border:1px solid var(--border); }
+
+    .section-title { font-size:2rem; font-weight:700; letter-spacing:-0.5px; margin-bottom:8px; color:var(--text); }
+    .section-sub { color:var(--text); font-size:1rem; max-width:560px; opacity:0.7; }
+    .section-header { display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom:32px; }
+    .services { padding:60px 0; }
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:24px; }
+    .service-card { background:var(--card-bg); padding:24px 16px; border-radius:var(--radius); box-shadow:var(--shadow); text-align:center; transition:var(--transition); border:1px solid var(--border); }
+    .service-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,0.08); }
+    .service-card .icon { font-size:2.2rem; color:var(--blue); margin-bottom:12px; }
+    .service-card h3 { font-weight:700; font-size:1rem; margin-bottom:4px; }
+    .service-card p { color:var(--text); font-size:0.9rem; opacity:0.7; }
+    .products { padding:60px 0; background:var(--gray-light); }
+    .products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+    .product-card { background:var(--card-bg); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:var(--transition); border:1px solid var(--border); position:relative; display:flex; flex-direction:column; }
+    .product-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,0.12); }
+    .product-card .image { background:var(--gray-light); padding:16px; display:flex; justify-content:center; align-items:center; min-height:180px; position:relative; flex-shrink:0; overflow:hidden; }
+    .product-card .image img { width:100%; height:180px; object-fit:contain; transition:transform 0.4s ease; }
+    .product-card:hover .image img { transform:scale(1.04); }
+    .product-card .image i { font-size:4rem; color:var(--blue); }
+    .product-card .badge { position:absolute; top:10px; left:10px; padding:3px 12px; border-radius:60px; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3px; color:#fff; z-index:2; }
+    .product-card .badge.new { background:var(--blue); }
+    .product-card .badge.sale { background:#e74c3c; }
+    .product-card .badge.best { background:#f39c12; }
+    .product-card .badge.limited { background:#8e44ad; }
+    .product-card .wishlist-btn { position:absolute; top:10px; right:10px; background:rgba(255,255,255,0.8); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:#999; transition:var(--transition); z-index:5; font-size:0.9rem; backdrop-filter:blur(4px); }
+    .product-card .wishlist-btn:hover { background:rgba(255,255,255,1); }
+    .product-card .wishlist-btn.active { color:#e74c3c; }
+    .product-card .info { padding:14px 16px 18px; flex:1; display:flex; flex-direction:column; }
+    .product-card .info .brand { font-size:0.7rem; color:var(--text); text-transform:uppercase; letter-spacing:0.5px; opacity:0.6; }
+    .product-card .info .name { font-weight:600; font-size:1rem; margin:2px 0 4px; color:var(--text); }
+    .product-card .info .price { font-weight:700; font-size:1.15rem; color:var(--blue); margin:6px 0 10px; }
+    .product-card .info .price .old { font-size:0.8rem; color:var(--text); text-decoration:line-through; margin-left:6px; font-weight:400; opacity:0.5; }
+    .product-card .info .actions { display:flex; gap:8px; margin-top:auto; flex-wrap:wrap; }
+    .product-card .info .actions .btn { flex:1; justify-content:center; padding:6px 10px; font-size:0.75rem; min-width:60px; }
+    .stats { padding:40px 0; background:var(--gray-light); }
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:24px; text-align:center; }
+    .stat-item .number { font-size:2.4rem; font-weight:800; color:var(--blue); }
+    .stat-item .label { color:var(--text); font-size:0.9rem; margin-top:4px; opacity:0.7; }
+    .categories, .brands { padding:40px 0; }
+    .category-grid, .brand-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:16px; }
+    .category-item, .brand-item { background:var(--gray-light); border-radius:var(--radius); padding:20px 12px; text-align:center; transition:var(--transition); cursor:pointer; border:1px solid transparent; }
+    .category-item:hover, .brand-item:hover { border-color:var(--blue); transform:translateY(-3px); box-shadow:var(--shadow); }
+    .category-item i, .brand-item i { font-size:2rem; color:var(--blue); margin-bottom:6px; }
+    .category-item span, .brand-item span { display:block; font-weight:500; font-size:0.85rem; color:var(--text); }
+    .testimonials { padding:60px 0; background:var(--gray-light); }
+    .testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px; }
+    .testi-card { background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); transition:var(--transition); }
+    .testi-card:hover { transform:translateY(-4px); }
+    .testi-card .stars { color:var(--gold); font-size:0.9rem; margin-bottom:8px; }
+    .testi-card p { font-style:italic; color:var(--text); margin-bottom:10px; font-size:0.95rem; opacity:0.8; }
+    .testi-card .author { font-weight:600; font-size:0.9rem; color:var(--text); }
+    .testi-card .role { font-size:0.75rem; color:var(--text); opacity:0.6; }
+    .instagram-feed { padding:60px 0; }
+    .insta-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:16px; }
+    .insta-item { aspect-ratio:1/1; background:var(--gray-light); border-radius:var(--radius); display:flex; align-items:center; justify-content:center; overflow:hidden; transition:var(--transition); border:1px solid var(--border); }
+    .insta-item img { width:100%; height:100%; object-fit:cover; }
+    .insta-item i { font-size:2.5rem; color:var(--blue); }
+    .insta-item:hover { transform:scale(1.02); box-shadow:var(--shadow); }
+
+    .footer { background:var(--black); color:#ccc; padding:50px 0 20px; position:relative; }
+    [data-theme="dark"] .footer { background:#0a0a14; }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:30px; margin-bottom:30px; }
+    .footer-brand .logo { color:#fff; margin-bottom:8px; font-size:1.2rem; }
+    .footer-brand .logo img { height:36px; width:auto; object-fit:contain; }
+    .footer-brand p { font-size:0.85rem; max-width:280px; color:#999; }
+    .footer h4 { color:#fff; font-weight:600; margin-bottom:12px; font-size:1rem; }
+    .footer ul { list-style:none; }
+    .footer ul li { margin-bottom:6px; }
+    .footer ul a { color:#999; transition:var(--transition); font-size:0.85rem; }
+    .footer ul a:hover { color:#fff; }
+    .footer-social { display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; }
+    .footer-social a { color:#999; font-size:1.2rem; transition:var(--transition); }
+    .footer-social a:hover { color:#fff; }
+    .footer-bottom { border-top:1px solid #222; padding-top:16px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.8rem; color:#666; }
+    .footer-admin-link { color:#444; font-size:0.7rem; transition:var(--transition); }
+    .footer-admin-link:hover { color:#aaa; }
+    .footer-newsletter input { padding:8px 12px; border-radius:60px; border:1px solid #333; background:#222; color:#fff; font-size:0.8rem; width:100%; max-width:200px; }
+    .footer-newsletter button { background:var(--blue); color:#fff; border-radius:60px; padding:8px 16px; font-size:0.8rem; margin-top:6px; }
+
+    .breadcrumb { padding:12px 0; font-size:0.85rem; color:var(--text); opacity:0.6; }
+    .breadcrumb a { color:var(--blue); }
+    .breadcrumb span { margin:0 6px; }
+    .page-section { display:none; padding:30px 0 60px; }
+    .page-section.active { display:block; }
+
+    .shop-filters { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; align-items:center; }
+    .shop-filters select, .shop-filters input { padding:8px 14px; border-radius:60px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); font-size:0.85rem; outline:none; transition:var(--transition); min-width:120px; }
+    .shop-filters select:focus, .shop-filters input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,54,120,0.1); }
+    .shop-filters .search-wrap { position:relative; flex:1; min-width:140px; }
+    .shop-filters .search-wrap input { width:100%; padding-left:36px; min-width:0; }
+    .shop-filters .search-wrap i { position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text); opacity:0.5; }
+
+    .product-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-bottom:40px; }
+    .pd-carousel { position:relative; aspect-ratio:1/1; background:var(--gray-light); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); }
+    .pd-carousel-track { display:flex; height:100%; transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .pd-carousel-track .slide { min-width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--gray-light); }
+    .pd-carousel-track .slide img { width:100%; height:100%; object-fit:contain; }
+    .pd-carousel-track .slide i { font-size:6rem; color:var(--text); opacity:0.3; }
+    .pd-carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.8); backdrop-filter:blur(4px); border:none; border-radius:50%; width:38px; height:38px; font-size:1.2rem; color:#333; cursor:pointer; z-index:10; box-shadow:0 2px 10px rgba(0,0,0,0.12); transition:var(--transition); display:flex; align-items:center; justify-content:center; }
+    .pd-carousel-btn:hover { background:#fff; transform:translateY(-50%) scale(1.05); }
+    .pd-carousel-btn.prev { left:8px; }
+    .pd-carousel-btn.next { right:8px; }
+    .pd-carousel-dots { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:10; background:rgba(0,0,0,0.2); backdrop-filter:blur(2px); padding:4px 10px; border-radius:20px; }
+    .pd-carousel-dots .dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.6); cursor:pointer; transition:var(--transition); border:none; }
+    .pd-carousel-dots .dot.active { background:var(--blue); transform:scale(1.2); }
+    .pd-info .pd-title { font-size:1.8rem; font-weight:700; margin-bottom:2px; color:var(--text); }
+    .pd-info .pd-brand { color:var(--text); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; opacity:0.6; }
+    .pd-info .pd-price { font-size:1.8rem; font-weight:700; color:var(--blue); margin:12px 0 16px; }
+    .pd-info .pd-price .old { font-size:1.2rem; color:var(--text); text-decoration:line-through; margin-left:10px; font-weight:400; opacity:0.5; }
+    .pd-info .pd-desc { color:var(--text); margin-bottom:20px; line-height:1.7; font-size:0.95rem; opacity:0.8; }
+    .pd-info .pd-actions { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+    .pd-info .pd-actions .btn { flex:1; justify-content:center; min-width:120px; }
+    .pd-info .size-guide { display:inline-block; color:var(--blue); font-weight:500; cursor:pointer; margin-bottom:16px; font-size:0.9rem; }
+    .pd-info .size-guide i { margin-right:4px; }
+    .pd-recommendations { margin-top:30px; border-top:1px solid var(--border); padding-top:24px; }
+    .pd-recommendations h3 { margin-bottom:16px; color:var(--text); }
+
+    .reviews-section { margin-top:30px; border-top:1px solid var(--border); padding-top:24px; }
+    .reviews-section h3 { font-size:1.2rem; margin-bottom:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; color:var(--text); }
+    .review-item { background:var(--card-bg); padding:16px; border-radius:var(--radius); margin-bottom:12px; display:flex; gap:14px; align-items:flex-start; box-shadow:0 2px 8px rgba(0,0,0,0.04); border:1px solid var(--border); }
+    .review-item .avatar { width:42px; height:42px; border-radius:50%; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1rem; flex-shrink:0; text-transform:uppercase; }
+    .review-item .content { flex:1; }
+    .review-item .content .stars { color:var(--gold); font-size:0.9rem; letter-spacing:1px; }
+    .review-item .content .author { font-weight:600; margin-right:8px; color:var(--text); }
+    .review-item .content .date { font-size:0.75rem; color:var(--text); opacity:0.5; }
+    .review-item .content p { margin-top:6px; color:var(--text); font-size:0.95rem; line-height:1.5; }
+    .review-item .content .actions { margin-top:6px; display:flex; gap:12px; font-size:0.8rem; color:var(--text); opacity:0.6; }
+    .review-item .content .actions i { margin-right:4px; cursor:pointer; transition:color 0.2s; }
+    .review-item .content .actions i:hover { color:var(--blue); }
+    .review-item .content .actions .liked { color:#e74c3c; }
+    .review-form { margin-top:20px; padding:20px; background:var(--gray-light); border-radius:var(--radius); }
+    .review-form .star-rating { display:flex; gap:6px; font-size:1.8rem; cursor:pointer; margin-bottom:8px; }
+    .review-form .star-rating i { color:var(--text); opacity:0.2; transition:color 0.2s; }
+    .review-form .star-rating i.active { color:var(--gold); opacity:1; }
+    .review-form .star-rating i:hover { color:var(--gold); opacity:1; }
+    .review-form input, .review-form textarea { padding:10px 14px; border-radius:10px; border:1px solid var(--border); font-size:0.9rem; outline:none; width:100%; margin-bottom:10px; background:var(--card-bg); color:var(--text); }
+    .review-form textarea { min-height:70px; resize:vertical; }
+    .review-form .btn { align-self:flex-start; }
+
+    .form-card { max-width:100%; background:var(--card-bg); padding:28px 24px; border-radius:var(--radius); box-shadow:var(--shadow); margin:0 auto; border:1px solid var(--border); }
+    .form-card .form-group { margin-bottom:16px; }
+    .form-card label { display:block; font-weight:500; margin-bottom:4px; font-size:0.9rem; color:var(--text); }
+    .form-card input, .form-card select, .form-card textarea { width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); transition:var(--transition); outline:none; font-size:0.95rem; }
+    .form-card input:focus, .form-card select:focus, .form-card textarea:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,54,120,0.08); }
+    .form-card textarea { min-height:80px; resize:vertical; }
+    .form-card .btn { width:100%; justify-content:center; }
+
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+    .about-image { background:var(--gray-light); border-radius:var(--radius); aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+    .about-image img { width:100%; height:100%; object-fit:cover; }
+    .about-text h2 { font-size:1.8rem; font-weight:700; margin-bottom:12px; color:var(--text); }
+    .about-text p { color:var(--text); margin-bottom:12px; line-height:1.7; font-size:0.95rem; opacity:0.8; }
+    .about-text .highlight { color:var(--blue); font-weight:600; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+    .contact-info h3 { font-size:1.2rem; margin-bottom:12px; color:var(--text); }
+    .contact-info p { color:var(--text); margin-bottom:6px; font-size:0.95rem; opacity:0.8; }
+    .contact-info .social-links { display:flex; gap:14px; margin-top:16px; flex-wrap:wrap; }
+    .contact-info .social-links a { font-size:1.6rem; color:var(--blue); transition:var(--transition); }
+    .contact-info .social-links a:hover { transform:scale(1.1); }
+
+    .blog-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; }
+    .blog-card { background:var(--card-bg); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border); transition:var(--transition); }
+    .blog-card:hover { transform:translateY(-4px); }
+    .blog-card .blog-image { background:var(--gray-light); height:180px; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+    .blog-card .blog-image img { width:100%; height:100%; object-fit:cover; }
+    .blog-card .blog-image i { font-size:3.5rem; color:var(--blue); }
+    .blog-card .blog-image .blog-category { position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.7); color:#fff; padding:2px 12px; border-radius:20px; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.5px; }
+    .blog-card .blog-content { padding:16px; }
+    .blog-card .blog-content .blog-meta { display:flex; gap:12px; font-size:0.7rem; color:var(--text); opacity:0.5; margin-bottom:6px; flex-wrap:wrap; }
+    .blog-card .blog-content h3 { font-size:1.1rem; margin:6px 0; color:var(--text); }
+    .blog-card .blog-content p { color:var(--text); font-size:0.9rem; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; opacity:0.7; }
+    .blog-card .blog-content .btn { margin-top:10px; }
+    .blog-single { max-width:100%; margin:0 auto; }
+    .blog-single .blog-image { width:100%; max-height:350px; border-radius:var(--radius); margin-bottom:16px; background:var(--gray-light); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+    .blog-single .blog-image img { width:100%; height:100%; object-fit:cover; }
+    .blog-single .blog-meta { color:var(--text); font-size:0.85rem; margin-bottom:12px; display:flex; gap:16px; flex-wrap:wrap; opacity:0.6; }
+    .blog-single .blog-body { font-size:1rem; line-height:1.8; color:var(--text); white-space:pre-wrap; }
+    .blog-single .blog-share { display:flex; gap:12px; margin:20px 0; flex-wrap:wrap; }
+    .blog-single .blog-share a { background:var(--gray-light); padding:8px 16px; border-radius:60px; font-size:0.85rem; transition:var(--transition); border:1px solid var(--border); color:var(--text); }
+    .blog-single .blog-share a:hover { background:var(--blue); color:#fff; }
+    .blog-pagination { display:flex; justify-content:center; gap:8px; margin-top:30px; flex-wrap:wrap; }
+    .blog-pagination button { padding:6px 14px; border-radius:60px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); transition:var(--transition); font-size:0.85rem; }
+    .blog-pagination button.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .blog-pagination button:hover { background:var(--gray-light); }
+
+    .wishlist-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; }
+    .comparator-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; background:var(--gray-light); padding:20px; border-radius:var(--radius); }
+    .comparator-item { background:var(--card-bg); padding:16px; border-radius:var(--radius); text-align:center; border:2px solid transparent; transition:var(--transition); cursor:pointer; border:1px solid var(--border); }
+    .comparator-item.selected { border-color:var(--blue); }
+    .comparator-item img { height:100px; object-fit:contain; margin:0 auto; }
+    .comparator-item .remove-comp { color:#e74c3c; font-size:0.8rem; cursor:pointer; }
+
+    .checkout-modal { position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); z-index:6000; display:none; justify-content:center; align-items:center; padding:20px; }
+    .checkout-modal.open { display:flex; }
+    .checkout-modal .modal-content { background:var(--card-bg); max-width:500px; width:100%; padding:32px; border-radius:var(--radius); max-height:90vh; overflow-y:auto; border:1px solid var(--border); }
+    .checkout-modal .modal-content h2 { margin-bottom:16px; color:var(--text); }
+    .checkout-modal .modal-content .payment-options { display:flex; gap:12px; margin:16px 0; flex-wrap:wrap; }
+    .checkout-modal .modal-content .payment-options button { padding:10px 16px; border-radius:60px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); transition:var(--transition); flex:1; min-width:80px; font-size:0.85rem; }
+    .checkout-modal .modal-content .payment-options button.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    .checkout-modal .modal-content .payment-options button:hover { background:var(--blue); color:#fff; }
+    .checkout-modal .modal-content .payment-options button.cod-option { background:#f39c12; color:#fff; border-color:#f39c12; }
+    .checkout-modal .modal-content .payment-options button.cod-option:hover { background:#e67e22; }
+
+    .payment-verification { margin:16px 0; padding:16px; background:var(--gray-light); border-radius:var(--radius); display:none; }
+    .payment-verification.active { display:block; }
+    .payment-verification input { padding:10px; border-radius:8px; border:1px solid var(--border); width:100%; max-width:200px; background:var(--card-bg); color:var(--text); }
+    .payment-verification button { margin-top:8px; }
+
+    /* ADMIN */
+    .admin-wrapper { display:flex; gap:0; background:var(--gray-light); border-radius:var(--radius); overflow:hidden; margin-top:16px; }
+    .admin-sidebar { width:var(--sidebar-width); background:var(--card-bg); border-right:1px solid var(--border); padding:20px 0; flex-shrink:0; min-height:600px; }
+    .admin-sidebar .admin-brand { padding:0 20px 20px; border-bottom:1px solid var(--border); margin-bottom:16px; }
+    .admin-sidebar .admin-brand h3 { font-weight:700; font-size:1.1rem; color:var(--blue); }
+    .admin-sidebar .admin-menu { list-style:none; }
+    .admin-sidebar .admin-menu li { padding:10px 20px; display:flex; align-items:center; gap:12px; font-weight:500; font-size:0.9rem; color:var(--text); transition:var(--transition); cursor:pointer; border-left:3px solid transparent; opacity:0.7; }
+    .admin-sidebar .admin-menu li:hover { background:var(--gray-light); color:var(--text); opacity:1; }
+    .admin-sidebar .admin-menu li.active { background:var(--gray-light); color:var(--blue); border-left-color:var(--blue); font-weight:600; opacity:1; }
+    .admin-sidebar .admin-menu li i { width:20px; text-align:center; }
+    .admin-content { flex:1; padding:24px; background:var(--card-bg); }
+    .admin-content .admin-tab { display:none; }
+    .admin-content .admin-tab.active { display:block; }
+    .admin-content .admin-tab h2 { font-size:1.4rem; margin-bottom:16px; color:var(--text); }
+    .admin-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:16px; margin-bottom:24px; }
+    .admin-stat-card { background:var(--gray-light); padding:16px; border-radius:var(--radius); text-align:center; border:1px solid var(--border); }
+    .admin-stat-card .number { font-size:2rem; font-weight:700; color:var(--blue); }
+    .admin-stat-card .label { color:var(--text); font-size:0.8rem; opacity:0.6; }
+    .admin-form { background:var(--card-bg); padding:20px; border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:24px; border:1px solid var(--border); }
+    .admin-form .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .admin-form .form-group { margin-bottom:14px; }
+    .admin-form label { font-weight:500; display:block; margin-bottom:4px; font-size:0.85rem; color:var(--text); }
+    .admin-form input, .admin-form select, .admin-form textarea { width:100%; padding:8px 12px; border-radius:8px; border:1px solid var(--border); font-size:0.9rem; outline:none; background:var(--bg); color:var(--text); }
+    .admin-form .size-checkboxes { display:flex; flex-wrap:wrap; gap:6px; }
+    .admin-form .size-checkboxes label { display:flex; align-items:center; gap:4px; font-weight:400; background:var(--gray-light); padding:2px 10px; border-radius:60px; cursor:pointer; font-size:0.8rem; border:1px solid var(--border); }
+    .admin-form .size-checkboxes input { width:auto; margin-right:2px; }
+    .admin-form .image-upload { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .admin-form .image-upload input[type="file"] { padding:6px; border:1px dashed var(--border); border-radius:8px; background:var(--gray-light); width:auto; }
+    .admin-form .image-upload .preview { display:flex; flex-wrap:wrap; gap:8px; }
+    .admin-form .image-upload .preview .img-wrapper { position:relative; width:60px; height:60px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+    .admin-form .image-upload .preview .img-wrapper img { width:100%; height:100%; object-fit:cover; }
+    .admin-form .image-upload .preview .remove-img { position:absolute; top:-6px; right:-6px; background:#e74c3c; color:#fff; border-radius:50%; width:18px; height:18px; font-size:12px; line-height:18px; text-align:center; cursor:pointer; border:1px solid #fff; }
+    .admin-form .btn { margin-top:6px; }
+    .admin-list { background:var(--card-bg); padding:16px; border-radius:var(--radius); box-shadow:var(--shadow); overflow-x:auto; border:1px solid var(--border); }
+    .admin-list table { width:100%; border-collapse:collapse; font-size:0.85rem; }
+    .admin-list th, .admin-list td { padding:8px 10px; text-align:left; border-bottom:1px solid var(--border); color:var(--text); }
+    .admin-list th { background:var(--gray-light); font-weight:600; }
+    .admin-list .actions button { margin-right:4px; padding:2px 8px; border-radius:6px; font-size:0.75rem; }
+
+    .media-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:12px; margin-top:12px; }
+    .media-item { background:var(--gray-light); border-radius:var(--radius); overflow:hidden; aspect-ratio:1/1; position:relative; border:2px solid transparent; transition:var(--transition); }
+    .media-item:hover { border-color:var(--blue); }
+    .media-item img { width:100%; height:100%; object-fit:cover; }
+    .media-item .media-actions { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); padding:4px; display:flex; justify-content:center; gap:6px; opacity:0; transition:var(--transition); }
+    .media-item:hover .media-actions { opacity:1; }
+    .media-item .media-actions button { color:#fff; font-size:0.7rem; background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px; }
+
+    #qr-scanner-container, #verify-qr-scanner-container { margin-top:16px; }
+    #qr-reader, #verify-qr-reader { width:100%; max-width:400px; margin:0 auto; border-radius:var(--radius); overflow:hidden; background:#000; }
+    #qr-reader video, #verify-qr-reader video { width:100% !important; height:auto !important; }
+    #qr-result, #verify-result { margin-top:12px; padding:12px; background:var(--gray-light); border-radius:var(--radius); word-break:break-all; display:none; border:1px solid var(--border); }
+    .qr-manual-input { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+    .qr-manual-input input { flex:1; min-width:150px; padding:8px 12px; border-radius:8px; border:1px solid var(--border); background:var(--card-bg); color:var(--text); }
+    .qr-manual-input button { padding:8px 16px; }
+
+    .login-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); z-index:5000; display:none; justify-content:center; align-items:center; padding:20px; }
+    .login-overlay.open { display:flex; }
+    .login-modal { background:var(--card-bg); padding:32px 24px; border-radius:var(--radius); max-width:380px; width:100%; box-shadow:0 40px 80px rgba(0,0,0,0.2); text-align:center; border:1px solid var(--border); }
+    .login-modal h2 { font-size:1.6rem; margin-bottom:6px; color:var(--text); }
+    .login-modal p { color:var(--text); margin-bottom:20px; font-size:0.95rem; opacity:0.7; }
+    .login-modal input { width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--border); margin-bottom:14px; font-size:1rem; outline:none; transition:var(--transition); background:var(--bg); color:var(--text); }
+    .login-modal input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(10,54,120,0.1); }
+    .login-modal .btn { width:100%; justify-content:center; }
+    .login-modal .error { color:#e74c3c; margin-top:6px; font-size:0.85rem; }
+
+    .cart-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:2000; opacity:0; visibility:hidden; transition:var(--transition); }
+    .cart-overlay.open { opacity:1; visibility:visible; }
+    .cart-sidebar { position:fixed; top:0; right:0; width:100%; max-width:400px; height:100%; background:var(--card-bg); z-index:2001; padding:20px; transform:translateX(100%); transition:var(--transition); display:flex; flex-direction:column; box-shadow:-8px 0 30px rgba(0,0,0,0.1); border-left:1px solid var(--border); }
+    .cart-sidebar.open { transform:translateX(0); }
+    .cart-sidebar .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+    .cart-sidebar .cart-header h2 { font-size:1.2rem; font-weight:700; color:var(--text); }
+    .cart-sidebar .cart-header button { font-size:1.2rem; color:var(--text); transition:var(--transition); }
+    .cart-sidebar .cart-header button:hover { color:var(--blue); }
+    .cart-items { flex:1; overflow-y:auto; padding-right:4px; }
+    .cart-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+    .cart-item .ci-image { width:50px; height:50px; background:var(--gray-light); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; }
+    .cart-item .ci-image img { width:100%; height:100%; object-fit:contain; }
+    .cart-item .ci-info { flex:1; }
+    .cart-item .ci-info .ci-name { font-weight:600; font-size:0.9rem; color:var(--text); }
+    .cart-item .ci-info .ci-price { color:var(--blue); font-weight:600; font-size:0.9rem; }
+    .cart-item .ci-info .ci-qty { display:flex; align-items:center; gap:6px; margin-top:4px; }
+    .cart-item .ci-info .ci-qty button { width:24px; height:24px; border-radius:50%; background:var(--gray-light); font-weight:600; font-size:0.8rem; transition:var(--transition); border:1px solid var(--border); }
+    .cart-item .ci-info .ci-qty button:hover { background:var(--gray-mid); }
+    .cart-item .ci-remove { color:var(--text); transition:var(--transition); font-size:0.8rem; opacity:0.5; }
+    .cart-item .ci-remove:hover { color:#e74c3c; opacity:1; }
+    .cart-footer { border-top:1px solid var(--border); padding-top:16px; margin-top:10px; }
+    .cart-footer .total { display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; color:var(--text); }
+    .cart-footer .btn { width:100%; justify-content:center; }
+
+    .toast { position:fixed; bottom:20px; right:20px; background:var(--black); color:#fff; padding:12px 24px; border-radius:60px; font-weight:500; font-size:0.9rem; box-shadow:0 12px 30px rgba(0,0,0,0.2); z-index:3000; transform:translateY(100px); opacity:0; transition:var(--transition); max-width:90%; }
+    .toast.show { transform:translateY(0); opacity:1; }
+    .fade-up { animation:fadeUp 0.6s ease forwards; }
+    @keyframes fadeUp { 0%{opacity:0;transform:translateY(20px);} 100%{opacity:1;transform:translateY(0);} }
+    .stock-badge { padding:2px 8px; border-radius:20px; font-size:0.7rem; font-weight:600; }
+    .stock-badge.in-stock { background:#d4edda; color:#155724; }
+    .stock-badge.low-stock { background:#fff3cd; color:#856404; }
+    .stock-badge.out-of-stock { background:#f8d7da; color:#721c24; }
+    .admin-notif-badge { background:#e74c3c; color:#fff; border-radius:50%; padding:0 6px; font-size:0.7rem; margin-left:6px; }
+
+    /* Responsive */
+    @media (max-width:1024px) { .hero-grid { grid-template-columns:1fr; text-align:center; } .hero-content p { margin:0 auto 24px; } .hero-buttons { justify-content:center; } .footer-grid { grid-template-columns:1fr 1fr; } .product-detail-grid { grid-template-columns:1fr; gap:24px; } .admin-wrapper { flex-direction:column; } .admin-sidebar { width:100%; border-right:none; border-bottom:1px solid var(--border); min-height:auto; } .about-grid { grid-template-columns:1fr; } .contact-grid { grid-template-columns:1fr; } }
+    @media (max-width:768px) {
+      .nav-links { display:none; position:absolute; top:64px; left:0; width:100%; background:var(--card-bg); border-bottom:1px solid var(--border); padding:20px; flex-direction:column; gap:16px; align-items:flex-start; box-shadow:0 10px 20px rgba(0,0,0,0.05); z-index:999; }
+      .nav-links.open { display:flex; }
+      .mobile-toggle { display:block; }
+      .header-top { padding:0 12px; }
+      .header-bottom { gap:8px; padding:8px 12px 12px; }
+      .search-bar { max-width:160px; min-width:80px; }
+    }
+    @media (min-width:769px) {
+      .mobile-toggle { display:none; }
+      .nav-links { display:flex !important; position:static; width:auto; background:none; box-shadow:none; padding:0; flex-direction:row; align-items:center; gap:24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- FLASH BAND -->
+  <div class="flash-band"><div class="flash-text" id="flashBandText">Livraison gratuite de vos sneakers préférées partout au Bénin !</div></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <!-- Ligne 1 -->
+      <div class="header-top">
+        <a href="#" onclick="navigateTo('home')" class="logo">
+          <img id="headerLogoImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%230A3678'/><text x='50%27 y='55%27 font-family='sans-serif' font-weight='bold' font-size='20' fill='white' text-anchor='middle'>N</text></svg>" alt="Logo">
+          <span class="logo-text">Nosbaskets</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#" id="nl-home" class="active" onclick="navigateTo('home')">Accueil</a></li>
+          <li><a href="#" id="nl-shop" onclick="navigateTo('shop')">Boutique</a></li>
+          <li><a href="#" id="nl-blog" onclick="navigateTo('blog')">Blog</a></li>
+          <li><a href="#" id="nl-wishlist" onclick="navigateTo('wishlist')">Favoris <span id="wishlistBadge" style="font-size:0.7rem;background:var(--blue);color:#fff;border-radius:50%;padding:0 6px;margin-left:2px;">0</span></a></li>
+          <li><a href="#" id="nl-compare" onclick="navigateTo('compare')">Comparer</a></li>
+          <li><a href="#" id="nl-verify" onclick="navigateTo('verify')">Authentifier</a></li>
+          <li><a href="#" id="nl-about" onclick="navigateTo('about')">À Propos</a></li>
+          <li><a href="#" id="nl-contact" onclick="navigateTo('contact')">Contact</a></li>
+          <li><a href="#" id="nl-auth" onclick="navigateTo('auth')">Suivi</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+      </div>
+
+      <!-- Ligne 2 -->
+      <div class="header-bottom">
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher..." id="headerSearchInput" onkeyup="handleHeaderSearch(event)">
+          <button onclick="triggerHeaderSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="header-tools">
+          <button onclick="toggleCart()"><i class="fa-solid fa-bag-shopping"></i><span class="cart-badge" id="cartBadgeCount">0</span></button>
+          <span class="theme-toggle" onclick="toggleTheme()" title="Thème"><i class="fa-solid fa-moon"></i></span>
+          <span class="lang-toggle" onclick="toggleLang()" id="langToggle">🇫🇷 FR</span>
+          <span class="currency-toggle" onclick="toggleCurrency()" id="currencyToggle">FCFA</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ADMIN PANEL -->
+  <div class="container" id="adminPanel" style="display:none;">
+    <div class="admin-wrapper">
+      <aside class="admin-sidebar">
+        <div class="admin-brand"><h3><i class="fa-solid fa-cubes"></i> Nosbaskets</h3></div>
+        <ul class="admin-menu" id="adminMenu">
+          <li class="active" data-tab="dashboard"><i class="fa-solid fa-chart-simple"></i> Tableau de bord <span id="adminNotifBadge" class="admin-notif-badge" style="display:none;">0</span></li>
+          <li data-tab="products"><i class="fa-solid fa-box"></i> Produits</li>
+          <li data-tab="orders"><i class="fa-solid fa-truck"></i> Commandes <span id="adminOrderBadge" class="admin-notif-badge" style="display:none;">0</span></li>
+          <li data-tab="media"><i class="fa-solid fa-images"></i> Médiathèque</li>
+          <li data-tab="blog"><i class="fa-solid fa-newspaper"></i> Blog</li>
+          <li data-tab="categories"><i class="fa-solid fa-tags"></i> Catégories</li>
+          <li data-tab="brands"><i class="fa-solid fa-copyright"></i> Marques</li>
+          <li data-tab="testimonials"><i class="fa-solid fa-comment-dots"></i> Témoignages</li>
+          <li data-tab="settings"><i class="fa-solid fa-gear"></i> Paramètres</li>
+          <li data-tab="seo"><i class="fa-solid fa-magnifying-glass-chart"></i> SEO</li>
+          <li onclick="logoutAdmin()" style="color:#e74c3c; border-left-color:#e74c3c;"><i class="fa-solid fa-right-from-bracket"></i> Déconnexion</li>
+        </ul>
+      </aside>
+      <div class="admin-content">
+        <div class="admin-tab active" id="tab-dashboard"><h2>Tableau de bord</h2><div class="admin-stats"><div class="admin-stat-card"><div class="number" id="statOrders">0</div><div class="label">Commandes</div></div><div class="admin-stat-card"><div class="number" id="statProducts">0</div><div class="label">Produits</div></div><div class="admin-stat-card"><div class="number" id="statVisits">1 234</div><div class="label">Visites</div></div><div class="admin-stat-card"><div class="number" id="statRevenue">0 FCFA</div><div class="label">CA</div></div><div class="admin-stat-card"><div class="number" id="statWishlist">0</div><div class="label">Favoris</div></div><div class="admin-stat-card"><div class="number" id="statPendingOrders">0</div><div class="label">En attente</div></div></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;"><button class="btn btn-outline btn-sm" onclick="exportOrdersCSV()"><i class="fa-solid fa-file-csv"></i> Exporter commandes CSV</button><button class="btn btn-outline btn-sm" onclick="exportProductsCSV()"><i class="fa-solid fa-file-csv"></i> Exporter produits CSV</button></div></div>
+        <div class="admin-tab" id="tab-products"><h2>Produits</h2><div class="admin-form"><h3 id="productFormTitle">Ajouter un produit</h3><input type="hidden" id="edit-product-idx"><div class="form-row"><div class="form-group"><label>Nom *</label><input type="text" id="p-name"></div><div class="form-group"><label>Marque *</label><select id="p-brand-select"></select></div><div class="form-group"><label>Catégorie *</label><select id="p-cat-select"></select></div><div class="form-group"><label>Badge</label><select id="p-badge"><option value="">Aucun</option><option value="new">Nouveau</option><option value="sale">Promo</option><option value="best">Best</option><option value="limited">Limited</option></select></div><div class="form-group"><label>Prix (FCFA) *</label><input type="number" id="p-price"></div><div class="form-group"><label>Ancien prix</label><input type="number" id="p-oldprice"></div><div class="form-group"><label>SKU</label><input type="text" id="p-sku" placeholder="NB-001"></div><div class="form-group"><label>Stock</label><input type="number" id="p-stock" value="10"></div><div class="form-group"><label>Code Auth</label><input type="text" id="p-authcode" readonly><button class="btn btn-outline btn-sm" onclick="generateAuthCode()">Générer</button></div></div><div class="form-group"><label>Description</label><textarea id="p-desc"></textarea></div><div class="form-group"><label>Tailles</label><div class="size-checkboxes" id="p-sizes-container"></div></div><div class="form-group"><label>Photos</label><input type="file" id="p-img-file" multiple accept="image/*" onchange="handleProductImgUpload(event)"><div class="preview" id="p-img-preview"></div></div><button class="btn btn-primary" onclick="saveProductForm()" id="productFormBtn">Enregistrer</button><button class="btn btn-outline btn-sm" id="cancelEditProductBtn" style="display:none;" onclick="resetProductForm()">Annuler</button></div><div class="admin-list"><table><thead><tr><th>Image</th><th>Nom</th><th>Prix</th><th>Stock</th><th>Vues</th><th>Actions</th></tr></thead><tbody id="adminProductsTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-orders"><h2>Commandes</h2><div class="admin-form"><input type="hidden" id="edit-order-idx"><div class="form-row"><div class="form-group"><label>Client *</label><input type="text" id="o-client"></div><div class="form-group"><label>Téléphone *</label><input type="text" id="o-phone"></div><div class="form-group"><label>Produit *</label><input type="text" id="o-item"></div><div class="form-group"><label>Statut</label><select id="o-status"><option>En préparation</option><option>En transit</option><option>Arrivé</option><option>Livré</option><option>En attente de paiement</option><option>En attente de confirmation</option><option>Payé</option></select></div><div class="form-group"><label>Note</label><input type="text" id="o-note"></div></div><button class="btn btn-primary" id="orderFormBtn" onclick="saveOrderForm()">Enregistrer</button><button class="btn btn-outline btn-sm" id="cancelEditOrderBtn" style="display:none;" onclick="resetOrderForm()">Annuler</button></div><div class="admin-list"><table><thead><tr><th>ID</th><th>Client</th><th>Produit</th><th>Statut</th><th>Paiement</th><th>Actions</th></tr></thead><tbody id="adminOrdersTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-media"><h2>Médiathèque</h2><div class="admin-form"><label>Uploader</label><input type="file" id="media-upload" multiple accept="image/*" onchange="handleMediaUpload(event)"></div><div class="media-grid" id="mediaGrid"></div></div>
+        <div class="admin-tab" id="tab-blog"><h2>Blog</h2><div class="admin-form"><div class="form-group"><label>Titre</label><input type="text" id="bl-title"></div><div class="form-group"><label>Catégorie</label><select id="bl-category"><option>Guides</option><option>Actualités</option><option>Culture</option><option>Collaborations</option><option>Histoire</option></select></div><div class="form-group"><label>Contenu</label><textarea id="bl-content" style="min-height:120px;"></textarea></div><div class="form-group"><label>Image</label><input type="file" id="bl-img-file" accept="image/*" onchange="handleBlogImgUpload(event)"><div class="preview" id="bl-img-preview"></div></div><button class="btn btn-primary" onclick="addBlogPost()">Publier</button><button class="btn btn-outline btn-sm" onclick="generate100BlogPosts()" style="margin-left:8px;">Générer 100 articles</button></div><div class="admin-list"><table><thead><tr><th>Image</th><th>Titre</th><th>Catégorie</th><th>Date</th><th>Actions</th></tr></thead><tbody id="adminBlogTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-categories"><h2>Catégories</h2><div class="admin-form" style="max-width:400px;"><label>Nom</label><input type="text" id="c-name"><label>Icône</label><input type="text" id="c-icon" value="fa-circle"><button class="btn btn-primary" onclick="addCategory()">Ajouter</button></div><div class="admin-list"><table><thead><tr><th>Icône</th><th>Nom</th><th>Actions</th></tr></thead><tbody id="adminCategoriesTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-brands"><h2>Marques</h2><div class="admin-form" style="max-width:400px;"><label>Nom</label><input type="text" id="b-name"><label>Logo</label><input type="file" id="b-img-file" accept="image/*" onchange="handleBrandImgUpload(event)"><div class="preview" id="b-img-preview"></div><button class="btn btn-primary" onclick="addBrand()">Ajouter</button></div><div class="admin-list"><table><thead><tr><th>Logo</th><th>Nom</th><th>Actions</th></tr></thead><tbody id="adminBrandsTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-testimonials"><h2>Témoignages clients</h2><div class="admin-form" id="testimonialForm"><h3 id="testimonialFormTitle">Ajouter un témoignage</h3><input type="hidden" id="edit-testimonial-idx"><div class="form-group"><label>Nom *</label><input type="text" id="t-name" placeholder="Jean Dupont"></div><div class="form-group"><label>Rôle / Localisation</label><input type="text" id="t-role" placeholder="Cotonou, Bénin"></div><div class="form-group"><label>Note (1-5)</label><select id="t-stars"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select></div><div class="form-group"><label>Texte *</label><textarea id="t-text" placeholder="Votre avis..." style="min-height:80px;"></textarea></div><div class="form-group"><label>Photo (optionnelle)</label><input type="file" id="t-img-file" accept="image/*" onchange="handleTestimonialImgUpload(event)"><div class="preview" id="t-img-preview"></div></div><button class="btn btn-primary" onclick="saveTestimonial()" id="testimonialFormBtn">Enregistrer</button><button class="btn btn-outline btn-sm" id="cancelEditTestimonialBtn" style="display:none;" onclick="resetTestimonialForm()">Annuler</button></div><div class="admin-list"><table><thead><tr><th>Photo</th><th>Nom</th><th>Rôle</th><th>Note</th><th>Avis</th><th>Actions</th></tr></thead><tbody id="adminTestimonialsTable"></tbody></table></div></div>
+        <div class="admin-tab" id="tab-settings"><h2>Paramètres</h2><div class="admin-form" style="max-width:500px;"><div class="form-group"><label>WhatsApp</label><input type="text" id="cfg-whatsapp"></div><div class="form-group"><label>Bandeau</label><input type="text" id="cfg-flash"></div><div class="form-group"><label>Logo</label><input type="file" id="cfg-logo-img" accept="image/*" onchange="handleSiteLogoUpload(event)"><div class="preview" id="cfg-logo-preview"></div><button class="btn btn-outline btn-sm" onclick="removeSiteLogo()">Supprimer</button></div><div class="form-group"><label>API Mobile Money (clé publique)</label><input type="text" id="cfg-api-key" placeholder="Votre clé API"></div><div class="form-group"><label>API Mobile Money (clé secrète)</label><input type="password" id="cfg-api-secret" placeholder="Votre clé secrète"></div><button class="btn btn-primary" onclick="saveSettings()">Sauvegarder</button></div><div class="admin-form" style="margin-top:20px;"><h3>Bannières</h3><input type="file" id="banner-img-file" accept="image/*" onchange="handleBannerUpload(event)"><div class="preview" id="banner-img-preview"></div><button class="btn btn-primary" onclick="addBanner()">Ajouter</button><div class="admin-list"><table><thead><tr><th>Aperçu</th><th>Actions</th></tr></thead><tbody id="adminBannersTable"></tbody></table></div></div></div>
+        <div class="admin-tab" id="tab-seo"><h2>SEO</h2><p style="color:var(--text);opacity:0.6;">Meta-titres, descriptions, sitemap (à venir).</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGES -->
+  <main class="page-section active" id="page-home">
+    <section class="hero"><div class="container hero-grid"><div class="hero-content"><h1>Plus qu'un shop,<br><span>une communauté.</span></h1><p>Trouvez vos paires limitées et authentiques importées d'Europe. Suivez votre colis en temps réel.</p><div class="hero-buttons"><button class="btn btn-primary" onclick="navigateTo('shop')">Découvrir <i class="fa-solid fa-arrow-right"></i></button><a href="#" target="_blank" class="btn btn-whatsapp" id="heroWhatsappBtn"><i class="fa-brands fa-whatsapp"></i> Nous écrire</a></div></div><div class="hero-image"><div class="hero-carousel" id="heroCarousel"><div class="slide slide-placeholder active"><i class="fa-solid fa-shoe-prints"></i></div></div><div class="hero-badge"><i class="fa-solid fa-shield-check" style="color:#2ecc71;"></i> 100% Authentique</div></div></div></section>
+    <section class="services"><div class="container"><div class="services-grid"><div class="service-card"><div class="icon"><i class="fa-solid fa-plane-departure"></i></div><h3>Provenance Europe</h3><p>Circuits officiels, marketplaces vérifiées.</p></div><div class="service-card"><div class="icon"><i class="fa-solid fa-qrcode"></i></div><h3>Suivi QR</h3><p>État exact de votre commande.</p></div><div class="service-card"><div class="icon"><i class="fa-solid fa-truck-fast"></i></div><h3>Livraison Bénin</h3><p>Showroom ou express à domicile.</p></div><div class="service-card"><div class="icon"><i class="fa-solid fa-comments"></i></div><h3>Service H24</h3><p>WhatsApp pour toute question.</p></div></div></div></section>
+    <section class="brands" id="homeBrandsSection" style="display:none; background:var(--gray-light); padding:40px 0;"><div class="container"><div class="section-header"><div><h2 class="section-title" style="font-size:1.4rem;">Nos marques</h2></div></div><div class="brand-grid" id="homeBrandGrid"></div></div></section>
+    <section class="categories" id="homeCategoriesSection" style="display:none;"><div class="container"><div class="section-header"><div><h2 class="section-title" style="font-size:1.4rem;">Univers</h2></div></div><div class="category-grid" id="homeCategoryGrid"></div></div></section>
+    <section class="products"><div class="container"><div class="section-header"><div><h2 class="section-title">Dernières pépites</h2><p class="section-sub">Les modèles les plus demandés.</p></div><button class="btn btn-outline btn-sm" onclick="navigateTo('shop')">Voir tout</button></div><div class="products-grid" id="featuredProductsGrid"></div></div></section>
+    <section class="stats"><div class="container stats-grid"><div class="stat-item"><div class="number">100%</div><div class="label">Authentiques</div></div><div class="stat-item"><div class="number">500+</div><div class="label">Clients</div></div><div class="stat-item"><div class="number">7-12</div><div class="label">Jours de transit</div></div><div class="stat-item"><div class="number">Cotonou</div><div class="label">Showroom</div></div></div></div></section>
+    <section class="testimonials" id="testimonialsSection"><div class="container"><div class="section-header" style="text-align:center;justify-content:center;"><div><h2 class="section-title">Communauté</h2><p class="section-sub">Ils nous font confiance.</p></div></div><div class="testi-grid" id="testimonialsGrid"></div></div></section>
+    <section class="instagram-feed" id="homeInstaSection" style="display:none;"><div class="container"><div class="section-header"><div><h2 class="section-title">Instagram</h2><p class="section-sub">@Nosbaskets</p></div></div><div class="insta-grid" id="homeInstaGrid"></div></div></section>
+  </main>
+
+  <section class="page-section" id="page-shop"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span>Boutique</div><div class="section-header"><div><h2 class="section-title">Catalogue</h2><p class="section-sub">Filtrez par marque ou recherchez.</p></div></div><div class="shop-filters"><div class="search-wrap"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="shopSearchInput" placeholder="Modèle..." onkeyup="filterShop()"></div><select id="shopFilterBrand" onchange="filterShop()"><option value="">Toutes les marques</option></select><select id="shopFilterCat" onchange="filterShop()"><option value="">Toutes les catégories</option></select><select id="shopSort" onchange="filterShop()"><option value="default">Tri défaut</option><option value="price-asc">Prix croissant</option><option value="price-desc">Prix décroissant</option><option value="popular">Plus vues</option></select></div><div class="products-grid" id="shopProductsGrid"></div></div></section>
+
+  <section class="page-section" id="page-product-detail"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span><a href="#" onclick="navigateTo('shop')">Boutique</a><span>&gt;</span>Détails</div><div class="product-detail-grid" id="productDetailContainer"></div><div class="pd-recommendations" id="pdRecommendations"><h3>Vous pourriez aimer</h3><div class="products-grid" id="pdSimilarGrid"></div></div><div class="reviews-section"><h3>Avis <span class="review-count" id="pd-review-count">(0)</span></h3><div id="pd-reviews-list"></div><div class="review-form"><h4>Laisser un avis</h4><div class="star-rating" id="reviewStarRating"><i class="fa-solid fa-star" data-val="1" onclick="setReviewStars(1)"></i><i class="fa-solid fa-star" data-val="2" onclick="setReviewStars(2)"></i><i class="fa-solid fa-star" data-val="3" onclick="setReviewStars(3)"></i><i class="fa-solid fa-star" data-val="4" onclick="setReviewStars(4)"></i><i class="fa-solid fa-star" data-val="5" onclick="setReviewStars(5)"></i></div><input type="text" id="r-author" placeholder="Votre nom"><textarea id="r-text" placeholder="Votre avis..."></textarea><button class="btn btn-primary btn-sm" onclick="submitReview()">Envoyer</button></div></div></div></section>
+
+  <section class="page-section" id="page-wishlist"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span>Favoris</div><h2 class="section-title">Vos favoris</h2><div class="wishlist-grid" id="wishlistGrid"></div></div></section>
+
+  <section class="page-section" id="page-compare"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span>Comparateur</div><h2 class="section-title">Comparer des sneakers</h2><p style="color:var(--text);opacity:0.6;">Cliquez sur une carte pour ajouter/supprimer de la comparaison.</p><div class="comparator-grid" id="comparatorGrid"></div><div id="comparatorResults" style="margin-top:20px;"></div></div></section>
+
+  <section class="page-section" id="page-blog"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span>Blog</div><div class="section-header"><div><h2 class="section-title">Blog &amp; Culture</h2><p class="section-sub">Tendances, guides, histoire.</p></div><select id="blogCategoryFilter" onchange="renderBlogList()" style="padding:8px 16px;border-radius:60px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);"><option value="">Toutes</option><option>Guides</option><option>Actualités</option><option>Culture</option><option>Collaborations</option><option>Histoire</option></select></div><div class="blog-grid" id="blogListGrid"></div><div class="blog-pagination" id="blogPagination"></div></div></section>
+
+  <section class="page-section" id="page-blog-single"><div class="container"><div class="breadcrumb"><a href="#" onclick="navigateTo('home')">Accueil</a><span>&gt;</span><a href="#" onclick="navigateTo('blog')">Blog</a><span>&gt;</span>Article</div><div class="blog-single" id="blogSingleContainer"></div></div></section>
+
+  <section class="page-section" id="page-about"><div class="container"><div class="about-grid"><div class="about-image"><i class="fa-solid fa-store" style="font-size:5rem;color:var(--blue);"></i></div><div class="about-text"><h2>Own your steps.</h2><p><span class="highlight">Nosbaskets</span> est née d’un constat : difficile d’accéder aux sneakers authentiques au Bénin.</p><p>Double implantation France et Cotonou pour un pont fluide et sécurisé.</p><p>Chaque paire contrôlée : coutures, odeur, boîte. Zéro contrefaçon.</p></div></div></div></section>
+
+  <section class="page-section" id="page-contact"><div class="container"><div class="section-header"><div><h2 class="section-title">Contact</h2><p class="section-sub">Une question ? Écrivez-nous.</p></div></div><div class="contact-grid"><div class="form-card"><div class="form-group"><label>Nom</label><input type="text" id="ct-name"></div><div class="form-group"><label>Email</label><input type="email" id="ct-email"></div><div class="form-group"><label>Message</label><textarea id="ct-msg" style="min-height:120px;"></textarea></div><button class="btn btn-primary" onclick="submitContactForm()">Envoyer</button></div><div class="contact-info"><h3>Coordonnées</h3><p><i class="fa-solid fa-location-dot" style="color:var(--blue);margin-right:8px;"></i> France : Versailles Saint-Quentin, 78990</p><p><i class="fa-solid fa-location-dot" style="color:var(--blue);margin-right:8px;"></i> Bénin : PK3, entrée côté école ESM, Cotonou</p><p><i class="fa-solid fa-map-pin" style="color:var(--blue);margin-right:8px;"></i> Google : "Nosbaskets"</p><p id="contactWhatsappText"><i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:8px;"></i> WhatsApp : +229 0166316356</p><p><i class="fa-solid fa-envelope" style="color:var(--blue);margin-right:8px;"></i> contact@nosbaskets.com</p><div class="social-links"><a href="https://www.instagram.com/nosbaskets.com_" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://www.instagram.com/nosbaskets.fr_ben" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://www.facebook.com/share/1CmTy3gGQ4/" target="_blank"><i class="fa-brands fa-facebook"></i></a></div></div></div></div></section>
+
+  <section class="page-section" id="page-auth"><div class="container" style="max-width:500px;"><div class="form-card" style="text-align:center;"><i class="fa-solid fa-qrcode" style="font-size:3.5rem;color:var(--blue);margin-bottom:12px;"></i><h2>Suivi de Colis</h2><p style="color:var(--text);opacity:0.6;font-size:0.85rem;">Scannez le QR ou saisissez l'identifiant.</p><button class="btn btn-primary" onclick="toggleQRScanner()" id="toggleScannerBtn"><i class="fa-solid fa-camera"></i> Ouvrir caméra</button><div id="qr-scanner-container" style="display:none;"><div id="qr-reader"></div></div><div class="qr-manual-input"><input type="text" id="manualTrackingID" placeholder="NB-9281-X"><button class="btn btn-outline btn-sm" onclick="checkManualTracking()">Rechercher</button></div><div id="qr-result"></div></div></div></section>
+
+  <section class="page-section" id="page-verify"><div class="container" style="max-width:600px;"><div class="form-card" style="text-align:center;"><i class="fa-solid fa-shield-check" style="font-size:3rem;color:var(--blue);margin-bottom:12px;"></i><h2>Authentifier une sneaker</h2><p style="color:var(--text);opacity:0.6;font-size:0.85rem;">Scannez le QR ou saisissez le code.</p><button class="btn btn-primary" onclick="toggleVerifyQRScanner()" id="toggleVerifyScannerBtn"><i class="fa-solid fa-camera"></i> Ouvrir caméra</button><div id="verify-qr-scanner-container" style="display:none;"><div id="verify-qr-reader"></div></div><div class="qr-manual-input" style="justify-content:center;"><input type="text" id="manualVerifyCode" placeholder="AUTH-7F3D" style="max-width:250px;"><button class="btn btn-outline btn-sm" onclick="checkManualVerify()">Vérifier</button></div><div id="verify-result"></div></div></div></section>
+
+  <!-- FOOTER -->
+  <footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="logo" style="color:#fff;"><img id="footerLogoImg" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%230A3678'/><text x='50%27 y='55%27 font-family='sans-serif' font-weight='bold' font-size='20' fill='white' text-anchor='middle'>N</text></svg>" alt="Logo"><span class="logo-text" style="color:#fff;">Nosbaskets</span></div><p>Votre passerelle pour des sneakers 100% authentiques, importées de France vers le Bénin.</p><div class="footer-social"><a href="https://www.instagram.com/nosbaskets.com_" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://www.instagram.com/nosbaskets.fr_ben" target="_blank"><i class="fa-brands fa-instagram"></i></a><a href="https://www.facebook.com/share/1CmTy3gGQ4/" target="_blank"><i class="fa-brands fa-facebook"></i></a><a href="https://wa.me/2290166316356" target="_blank"><i class="fa-brands fa-whatsapp"></i></a></div></div><div><h4>Boutique</h4><ul><li><a href="#" onclick="navigateTo('shop')">Tous les modèles</a></li><li><a href="#" onclick="navigateTo('shop')">Nouveautés</a></li><li><a href="#" onclick="navigateTo('shop')">Éditions limitées</a></li></ul></div><div><h4>Infos</h4><ul><li><a href="#" onclick="navigateTo('about')">À propos</a></li><li><a href="#" onclick="navigateTo('contact')">Contact</a></li><li><a href="#" onclick="navigateTo('blog')">Blog</a></li><li><a href="#">FAQ</a></li><li><a href="#">CGV</a></li></ul></div><div><h4>Catégories</h4><ul id="footerCategories"></ul></div><div><h4>Newsletter</h4><div class="footer-newsletter"><input type="email" placeholder="Votre email"><button>S'abonner</button></div><p style="font-size:0.75rem;margin-top:8px;color:#666;">Offres exclusives.</p></div></div><div class="footer-bottom"><div>&copy; 2026 Nosbaskets. Tous droits réservés.</div><div><a href="#" onclick="openLoginModal()" class="footer-admin-link"><i class="fa-regular fa-user-gear"></i> Admin</a></div></div></div></footer>
+
+  <!-- LOGIN -->
+  <div class="login-overlay" id="loginOverlay"><div class="login-modal"><h2>Accès Sécurisé</h2><p>Mot de passe administrateur.</p><input type="password" id="adminPasswordInput"><button class="btn btn-primary" onclick="submitAdminLogin()">Se connecter</button><button class="btn btn-outline btn-sm" onclick="closeLoginModal()" style="margin-top:8px;">Annuler</button><div class="error" id="loginErrorMsg"></div></div></div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="modal-content">
+      <h2>Passer la commande</h2>
+      <div id="checkoutSummary" style="margin-bottom:16px;padding:12px;background:var(--gray-light);border-radius:var(--radius);"></div>
+      <div class="form-group"><label>Nom complet</label><input type="text" id="checkout-name" placeholder="Votre nom"></div>
+      <div class="form-group"><label>Téléphone</label><input type="text" id="checkout-phone" placeholder="+229 XX XX XX XX"></div>
+      <div class="form-group"><label>Adresse de livraison</label><input type="text" id="checkout-address" placeholder="Cotonou, PK3..."></div>
+      <div class="form-group"><label>Email (pour le reçu)</label><input type="email" id="checkout-email" placeholder="votre@email.com"></div>
+
+      <p style="font-weight:600;margin:12px 0 8px;">Mode de paiement :</p>
+      <div class="payment-options">
+        <button class="active" data-method="mobile-money" onclick="selectPayment('mobile-money')"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Money</button>
+        <button data-method="stripe" onclick="selectPayment('stripe')"><i class="fa-brands fa-stripe"></i> Stripe</button>
+        <button data-method="cod" onclick="selectPayment('cod')" class="cod-option"><i class="fa-solid fa-truck"></i> Paiement à la livraison</button>
+        <button data-method="whatsapp" onclick="selectPayment('whatsapp')"><i class="fa-brands fa-whatsapp"></i> Confirmer par WhatsApp</button>
+      </div>
+
+      <div id="paymentDetails" style="margin:16px 0;padding:12px;background:var(--gray-light);border-radius:var(--radius);">
+        <p style="color:var(--text);">💳 Paiement Mobile Money : après confirmation, un code de validation vous sera envoyé par email. Entrez-le ci-dessous pour valider le paiement.</p>
+      </div>
+
+      <div class="payment-verification" id="paymentVerification">
+        <p style="font-weight:600;margin-bottom:4px;">Code de validation reçu par email :</p>
+        <input type="text" id="verification-code" placeholder="Ex: 123456">
+        <button class="btn btn-primary btn-sm" onclick="verifyPaymentCode()"><i class="fa-solid fa-check"></i> Valider le paiement</button>
+        <p style="font-size:0.8rem;opacity:0.6;margin-top:4px;">Si vous n'avez pas reçu le code, vérifiez vos spams.</p>
+      </div>
+
+      <button class="btn btn-success" onclick="confirmCheckout()" style="width:100%;"><i class="fa-solid fa-check"></i> Confirmer la commande</button>
+      <button class="btn btn-outline btn-sm" onclick="closeCheckout()" style="margin-top:8px;width:100%;">Annuler</button>
+    </div>
+  </div>
+
+  <!-- CART -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header"><h2>Panier</h2><button onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="cart-items" id="cartItemsContainer"></div>
+    <div class="cart-footer"><div class="total"><span>Sous-total</span><span id="cartTotalPriceText">0 FCFA</span></div><button class="btn btn-primary" onclick="openCheckout()">Passer à la caisse <i class="fa-solid fa-arrow-right"></i></button></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ============================================================
+    // DONNÉES GLOBALES
+    // ============================================================
+    let appData = { products: [], categories: [], brands: [], blogs: [], orders: [], instagram: [], testimonials: [], settings: { whatsapp: '2290166316356', flashMsg: 'Livraison gratuite de vos sneakers préférées partout au Bénin !', logo: null, apiKey: '', apiSecret: '' }, banners: [] };
+    let cart = JSON.parse(localStorage.getItem('nosbaskets_cart') || '[]');
+    let adminLoggedIn = false;
+    let wishlist = JSON.parse(localStorage.getItem('nosbaskets_wishlist') || '[]');
+    let compareList = JSON.parse(localStorage.getItem('nosbaskets_compare') || '[]');
+    let lang = 'fr';
+    let currency = 'FCFA';
+    const exchangeRate = 655.96;
+    let currentActiveReviewStars = 5;
+    let currentSelectedDetailProductIdx = null;
+    let tempUploadedProductImgs = [], tempUploadedBrandImg = "", tempUploadedBlogImg = "", tempUploadedInstaImg = "", tempUploadedBannerImg = "", tempUploadedLogoImg = "";
+    let tempUploadedTestimonialImg = "";
+    let carouselInterval = null;
+    let html5QrScanner = null, html5QrVerifyScanner = null;
+    let detailCurrentSlide = 0, detailImagesCount = 1;
+    let mediaLibrary = JSON.parse(localStorage.getItem('nosbaskets_media') || '[]');
+    let blogPage = 1;
+    const BLOG_PER_PAGE = 6;
+    let selectedPayment = 'mobile-money';
+    let theme = localStorage.getItem('nosbaskets_theme') || 'light';
+    let pendingOrdersCount = 0;
+    let verificationCode = '';
+
+    // ============================================================
+    // API - LIRE / ÉCRIRE SUR LE SERVEUR
+    // ============================================================
+    async function loadAllData() {
+      try {
+        const response = await fetch('api.php');
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        if (data && Object.keys(data).length > 0) {
+          appData = data;
+        } else {
+          // Initialisation avec des valeurs par défaut
+          appData = { products: [], categories: [], brands: [], blogs: [], orders: [], instagram: [], testimonials: [], settings: { whatsapp: '2290166316356', flashMsg: 'Livraison gratuite de vos sneakers préférées partout au Bénin !', logo: null, apiKey: '', apiSecret: '' }, banners: [] };
+          await persistAppData();
+        }
+        // Mise à jour de l'interface
+        updateSiteLogo();
+        updateCart();
+        updateWishlistBadge();
+        renderHome();
+        renderShop();
+        renderBlogList();
+        renderWishlist();
+        renderComparator();
+        renderFooterCategories();
+        updateAdminNotifications();
+        renderTestimonials();
+        if (adminLoggedIn) { populateSelects(); renderAdminProducts(); renderAdminCategories(); renderAdminBrands(); renderAdminBlog(); renderAdminOrders(); renderAdminInstagram(); renderAdminBanners(); loadSettingsToForm(); loadLogoToForm(); renderMediaLibrary(); updateDashboardStats(); renderAdminTestimonials(); }
+      } catch (error) {
+        console.error('Erreur de chargement', error);
+        showToast('Impossible de charger les données. Vérifiez votre connexion.');
+      }
+    }
+
+    async function persistAppData() {
+      try {
+        const response = await fetch('api.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(appData)
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const result = await response.json();
+        if (!result.success) console.warn('Sauvegarde serveur :', result);
+      } catch (error) {
+        console.error('Erreur de sauvegarde', error);
+        showToast('Erreur lors de la sauvegarde en ligne.');
+      }
+    }
+
+    // ============================================================
+    // PERSISTANCE DU PANIER (localStorage)
+    // ============================================================
+    function persistCart() {
+      localStorage.setItem('nosbaskets_cart', JSON.stringify(cart));
+    }
+
+    // ============================================================
+    // THÈME, LANGUE, DEVISE
+    // ============================================================
+    function toggleTheme() {
+      theme = theme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('nosbaskets_theme', theme);
+      document.querySelector('.theme-toggle').innerHTML = theme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+      showToast(theme === 'dark' ? 'Mode sombre activé' : 'Mode clair activé');
+    }
+    function toggleCurrency() {
+      currency = currency === 'FCFA' ? 'EUR' : 'FCFA';
+      document.getElementById('currencyToggle').textContent = currency;
+      renderHome(); renderShop(); renderWishlist(); renderComparator();
+      if (currentSelectedDetailProductIdx !== null) viewProductDetail(currentSelectedDetailProductIdx);
+      showToast(currency === 'EUR' ? 'Prix affichés en Euros' : 'Prix affichés en FCFA');
+    }
+    function formatPriceCurrency(price) {
+      if (currency === 'EUR') return (price / exchangeRate).toFixed(2) + ' €';
+      return new Intl.NumberFormat('fr-FR').format(price) + ' FCFA';
+    }
+    function toggleLang() {
+      lang = lang === 'fr' ? 'en' : 'fr';
+      document.getElementById('langToggle').textContent = lang === 'fr' ? '🇫🇷 FR' : '🇬🇧 EN';
+      renderHome(); renderShop(); renderBlogList(); renderWishlist(); renderComparator();
+      showToast(lang === 'fr' ? 'Langue changée en français' : 'Language switched to English');
+    }
+
+    // ============================================================
+    // NAVIGATION
+    // ============================================================
+    function navigateTo(page) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const target = document.getElementById('page-' + page);
+      if (target) target.classList.add('active');
+      const link = document.getElementById('nl-' + page);
+      if (link) link.classList.add('active');
+      document.getElementById('navLinks').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (page === 'auth') initQRScanner(); else stopQRScanner();
+      if (page === 'verify') {} else stopVerifyQRScanner();
+      if (page === 'wishlist') renderWishlist();
+      if (page === 'compare') renderComparator();
+    }
+    function toggleMobileMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+    function generateAuthCode() { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; let code = 'AUTH-'; for (let i=0;i<6;i++) code+=chars[Math.floor(Math.random()*chars.length)]; document.getElementById('p-authcode').value=code; }
+    function generateSizeCheckboxes() { const c = document.getElementById('p-sizes-container'); if(!c) return; c.innerHTML=''; for(let s=36;s<=47;s++) c.innerHTML+=`<label><input type="checkbox" name="p-sizes-chk" value="${s}"> ${s}</label>`; }
+
+    // ============================================================
+    // WISHLIST & COMPARATOR
+    // ============================================================
+    function toggleWishlist(idx) {
+      const i = wishlist.indexOf(idx);
+      if (i > -1) wishlist.splice(i, 1);
+      else wishlist.push(idx);
+      localStorage.setItem('nosbaskets_wishlist', JSON.stringify(wishlist));
+      updateWishlistBadge();
+      renderHome(); renderShop(); renderWishlist();
+      showToast(i > -1 ? 'Retiré des favoris' : 'Ajouté aux favoris');
+    }
+    function updateWishlistBadge() { document.getElementById('wishlistBadge').textContent = wishlist.length; }
+    function renderWishlist() {
+      const grid = document.getElementById('wishlistGrid');
+      if (wishlist.length === 0) { grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text);opacity:0.5;padding:40px;">Aucun favori.</p>'; return; }
+      grid.innerHTML = wishlist.map(idx => {
+        const p = appData.products[idx]; if (!p) return '';
+        const img = p.images?.[0] || '';
+        return `<div class="product-card"><div class="image">${img?`<img src="${img}">`:'<i class="fa-solid fa-box"></i>'}</div><div class="info"><span class="brand">${p.brand}</span><h3 class="name">${p.name}</h3><div class="price">${formatPriceCurrency(p.price)}</div><div class="actions"><button class="btn btn-primary btn-sm" onclick="viewProductDetail(${idx})">Voir</button><button class="btn btn-danger btn-sm" onclick="toggleWishlist(${idx})"><i class="fa-solid fa-heart"></i></button></div></div></div>`;
+      }).join('');
+    }
+    function toggleCompare(idx) {
+      const i = compareList.indexOf(idx);
+      if (i > -1) compareList.splice(i, 1);
+      else if (compareList.length < 4) compareList.push(idx);
+      else { showToast('Maximum 4 produits.'); return; }
+      localStorage.setItem('nosbaskets_compare', JSON.stringify(compareList));
+      renderComparator();
+      showToast(i > -1 ? 'Retiré de la comparaison' : 'Ajouté à la comparaison');
+    }
+    function renderComparator() {
+      const grid = document.getElementById('comparatorGrid');
+      const results = document.getElementById('comparatorResults');
+      const allProducts = appData.products.map((p, idx) => ({ ...p, idx }));
+      grid.innerHTML = allProducts.map(p => {
+        const isSelected = compareList.includes(p.idx);
+        const img = p.images?.[0] || '';
+        return `<div class="comparator-item ${isSelected?'selected':''}" onclick="toggleCompare(${p.idx})">
+          ${img?`<img src="${img}">`:'<i class="fa-solid fa-box" style="font-size:2rem;"></i>'}
+          <div style="font-weight:600;font-size:0.85rem;">${p.name}</div>
+          <div style="font-size:0.75rem;opacity:0.6;">${p.brand}</div>
+          ${isSelected ? '<div class="remove-comp"><i class="fa-solid fa-check-circle" style="color:var(--blue);"></i> Sélectionné</div>' : '<div style="font-size:0.7rem;opacity:0.5;">Cliquez pour ajouter</div>'}
+        </div>`;
+      }).join('');
+      if (compareList.length < 2) { results.innerHTML = '<p style="color:var(--text);opacity:0.5;">Sélectionnez au moins 2 produits.</p>'; return; }
+      const compareProducts = compareList.map(idx => appData.products[idx]).filter(p => p);
+      if (compareProducts.length < 2) return;
+      let html = '<h3 style="margin-bottom:12px;color:var(--text);">Comparaison</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">';
+      compareProducts.forEach(p => {
+        const img = p.images?.[0] || '';
+        html += `<div style="background:var(--card-bg);border-radius:var(--radius);padding:16px;text-align:center;border:1px solid var(--border);">
+          ${img?`<img src="${img}" style="height:120px;object-fit:contain;margin:0 auto;">`:'<i class="fa-solid fa-box" style="font-size:3rem;"></i>'}
+          <div style="font-weight:700;color:var(--text);">${p.name}</div>
+          <div style="opacity:0.6;font-size:0.8rem;">${p.brand}</div>
+          <div style="font-weight:700;color:var(--blue);">${formatPriceCurrency(p.price)}</div>
+          <div style="font-size:0.8rem;">Stock: ${p.stock||0}</div>
+          <div style="font-size:0.8rem;">Vues: ${p.views||0}</div>
+          <button class="btn btn-outline btn-sm" onclick="removeFromCompare(${compareProducts.indexOf(p)})" style="margin-top:8px;">Retirer</button>
+        </div>`;
+      });
+      html += '</div>';
+      results.innerHTML = html;
+    }
+    function removeFromCompare(localIdx) {
+      if (compareList.length > localIdx) compareList.splice(localIdx, 1);
+      localStorage.setItem('nosbaskets_compare', JSON.stringify(compareList));
+      renderComparator();
+    }
+
+    // ============================================================
+    // RENDER HOME, SHOP
+    // ============================================================
+    function renderHome() {
+      const wa = appData.settings?.whatsapp || '2290166316356';
+      const flash = appData.settings?.flashMsg || 'Livraison gratuite de vos sneakers préférées partout au Bénin !';
+      document.getElementById('flashBandText').textContent = flash;
+      document.getElementById('heroWhatsappBtn').href = `https://wa.me/${wa}?text=Bonjour%20Nosbaskets`;
+      document.getElementById('contactWhatsappText').innerHTML = `<i class="fa-brands fa-whatsapp" style="color:#25D366;margin-right:8px;"></i> WhatsApp : +${wa}`;
+      renderCarousel();
+      const catSec = document.getElementById('homeCategoriesSection');
+      const catGrid = document.getElementById('homeCategoryGrid');
+      if (appData.categories.length > 0) { catSec.style.display = 'block'; catGrid.innerHTML = appData.categories.map(c => `<div class="category-item" onclick="filterByCatAndGo('${c.name}')"><i class="fa-solid ${c.icon||'fa-circle'}"></i><span>${c.name}</span></div>`).join(''); } else catSec.style.display = 'none';
+      const bSec = document.getElementById('homeBrandsSection');
+      const bGrid = document.getElementById('homeBrandGrid');
+      if (appData.brands.length > 0) { bSec.style.display = 'block'; bGrid.innerHTML = appData.brands.map(b => `<div class="brand-item" onclick="filterByBrandAndGo('${b.name}')">${b.image?`<img src="${b.image}" style="height:32px;object-fit:contain;margin:0 auto 4px;">`:'<i class="fa-solid fa-tag"></i>'}<span>${b.name}</span></div>`).join(''); } else bSec.style.display = 'none';
+      const featGrid = document.getElementById('featuredProductsGrid');
+      const slices = appData.products.slice(-4).reverse();
+      if (slices.length === 0) featGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text);opacity:0.5;padding:20px;">Aucun produit.</p>';
+      else featGrid.innerHTML = slices.map(p => { const idx = appData.products.indexOf(p); const img = p.images?.[0] || ''; const isWish = wishlist.includes(idx); return `<div class="product-card"><div class="image" onclick="viewProductDetail(${idx})">${p.badge?`<span class="badge ${p.badge}">${p.badge}</span>`:''}${img?`<img src="${img}">`:'<i class="fa-solid fa-box"></i>'}</div><button class="wishlist-btn ${isWish?'active':''}" onclick="event.stopPropagation();toggleWishlist(${idx})"><i class="fa-solid ${isWish?'fa-heart':'fa-heart'}"></i></button><div class="info"><span class="brand">${p.brand}</span><h3 class="name" onclick="viewProductDetail(${idx})">${p.name}</h3><div class="price">${formatPriceCurrency(p.price)}${p.oldPrice?`<span class="old">${formatPriceCurrency(p.oldPrice)}</span>`:''}</div><div class="actions"><button class="btn btn-outline" onclick="viewProductDetail(${idx})">Détails</button><button class="btn btn-primary" onclick="fastAddToCart(${idx})"><i class="fa-solid fa-cart-plus"></i></button></div></div></div>`; }).join('');
+      const iSec = document.getElementById('homeInstaSection');
+      const iGrid = document.getElementById('homeInstaGrid');
+      if (appData.instagram && appData.instagram.length > 0) { iSec.style.display = 'block'; iGrid.innerHTML = appData.instagram.map(img => `<div class="insta-item"><img src="${img}"></div>`).join(''); } else iSec.style.display = 'none';
+      renderTestimonials();
+    }
+
+    function renderTestimonials() {
+      const grid = document.getElementById('testimonialsGrid');
+      if (!appData.testimonials || appData.testimonials.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text);opacity:0.5;">Aucun témoignage pour le moment.</p>';
+        return;
+      }
+      grid.innerHTML = appData.testimonials.map(t => {
+        const stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
+        const img = t.image ? `<img src="${t.image}" style="width:60px;height:60px;object-fit:cover;border-radius:50%;margin:0 auto 10px;display:block;">` : '';
+        return `<div class="testi-card">
+          ${img}
+          <div class="stars">${stars}</div>
+          <p>"${t.text}"</p>
+          <div class="author">${t.name}</div>
+          <div class="role">${t.role || ''}</div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderCarousel() {
+      const container = document.getElementById('heroCarousel');
+      if (!container) return;
+      if (carouselInterval) clearInterval(carouselInterval);
+      const banners = appData.banners || [];
+      if (banners.length === 0) { container.innerHTML = '<div class="slide slide-placeholder active"><i class="fa-solid fa-shoe-prints"></i></div>'; return; }
+      container.innerHTML = banners.map((img, i) => `<div class="slide ${i===0?'active':''}" style="background-image:url('${img}');"></div>`).join('');
+      let current = 0; const slides = container.querySelectorAll('.slide');
+      if (slides.length === 0) return;
+      carouselInterval = setInterval(() => { slides.forEach(s => s.classList.remove('active')); current = (current + 1) % slides.length; slides[current].classList.add('active'); }, 4000);
+    }
+    function renderShop() {
+      const fBrand = document.getElementById('shopFilterBrand');
+      const fCat = document.getElementById('shopFilterCat');
+      fBrand.innerHTML = '<option value="">Toutes les marques</option>' + appData.brands.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+      fCat.innerHTML = '<option value="">Toutes les catégories</option>' + appData.categories.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+      filterShop();
+    }
+    function filterShop() {
+      const searchVal = document.getElementById('shopSearchInput').value.toLowerCase();
+      const brandVal = document.getElementById('shopFilterBrand').value;
+      const catVal = document.getElementById('shopFilterCat').value;
+      const sortVal = document.getElementById('shopSort').value;
+      let filtered = appData.products.map((p, idx) => ({ ...p, originalIdx: idx }));
+      if (searchVal) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchVal) || p.brand.toLowerCase().includes(searchVal));
+      if (brandVal) filtered = filtered.filter(p => p.brand === brandVal);
+      if (catVal) filtered = filtered.filter(p => p.category === catVal);
+      if (sortVal === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      else if (sortVal === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      else if (sortVal === 'popular') filtered.sort((a, b) => (b.views || 0) - (a.views || 0));
+      const grid = document.getElementById('shopProductsGrid');
+      if (filtered.length === 0) { grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text);opacity:0.5;padding:40px 0;">Aucune paire trouvée.</p>'; return; }
+      grid.innerHTML = filtered.map(p => { const idx = p.originalIdx; const img = p.images?.[0] || ''; const isWish = wishlist.includes(idx); return `<div class="product-card"><div class="image" onclick="viewProductDetail(${idx})">${p.badge?`<span class="badge ${p.badge}">${p.badge}</span>`:''}${img?`<img src="${img}">`:'<i class="fa-solid fa-box"></i>'}</div><button class="wishlist-btn ${isWish?'active':''}" onclick="event.stopPropagation();toggleWishlist(${idx})"><i class="fa-solid ${isWish?'fa-heart':'fa-heart'}"></i></button><div class="info"><span class="brand">${p.brand}</span><h3 class="name" onclick="viewProductDetail(${idx})">${p.name}</h3><div class="price">${formatPriceCurrency(p.price)}${p.oldPrice?`<span class="old">${formatPriceCurrency(p.oldPrice)}</span>`:''}</div><div class="actions"><button class="btn btn-outline" onclick="viewProductDetail(${idx})">Détails</button><button class="btn btn-primary" onclick="fastAddToCart(${idx})"><i class="fa-solid fa-cart-plus"></i></button><button class="btn btn-outline btn-sm" onclick="toggleCompare(${idx})" title="Comparer"><i class="fa-solid fa-arrows-left-right"></i></button></div></div></div>`; }).join('');
+    }
+    function filterByBrandAndGo(name) { navigateTo('shop'); document.getElementById('shopFilterBrand').value = name; filterShop(); }
+    function filterByCatAndGo(name) { navigateTo('shop'); document.getElementById('shopFilterCat').value = name; filterShop(); }
+    function handleHeaderSearch(e) { if (e.key === 'Enter') triggerHeaderSearch(); }
+    function triggerHeaderSearch() { const q = document.getElementById('headerSearchInput').value; navigateTo('shop'); document.getElementById('shopSearchInput').value = q; filterShop(); }
+
+    // ============================================================
+    // PRODUCT DETAIL
+    // ============================================================
+    function viewProductDetail(idx) {
+      currentSelectedDetailProductIdx = idx;
+      const p = appData.products[idx];
+      if (!p) return;
+      p.views = (p.views || 0) + 1;
+      persistAppData();
+      navigateTo('product-detail');
+      const container = document.getElementById('productDetailContainer');
+      const images = p.images || [];
+      detailImagesCount = images.length > 0 ? images.length : 1;
+      detailCurrentSlide = 0;
+      let galleryHtml = `<div class="pd-carousel"><div class="pd-carousel-track" id="pdCarouselTrack">`;
+      if (images.length > 0) images.forEach(img => galleryHtml += `<div class="slide"><img src="${img}"></div>`);
+      else galleryHtml += `<div class="slide"><i class="fa-solid fa-box"></i></div>`;
+      galleryHtml += `</div>`;
+      if (images.length > 1) {
+        galleryHtml += `<button class="pd-carousel-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button><button class="pd-carousel-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button><div class="pd-carousel-dots">${images.map((_,i)=>`<span class="dot ${i===0?'active':''}" onclick="goToSlide(${i})"></span>`).join('')}</div>`;
+      }
+      galleryHtml += `</div>`;
+      let sizesHtml = `<div class="form-group" style="margin:14px 0;"><label style="font-weight:600;">Pointure :</label><select id="pd-size-select" style="padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card-bg);color:var(--text);width:100%;max-width:200px;">`;
+      if (p.sizes && p.sizes.length) p.sizes.forEach(sz => sizesHtml += `<option value="${sz}">${sz}</option>`);
+      else sizesHtml += `<option value="Unique">Unique</option>`;
+      sizesHtml += `</select></div>`;
+      const isWish = wishlist.includes(idx);
+      const infoHtml = `<div class="pd-info"><span class="pd-brand">${p.brand}</span><h1 class="pd-title">${p.name}</h1><div class="pd-price">${formatPriceCurrency(p.price)}${p.oldPrice?`<span class="old">${formatPriceCurrency(p.oldPrice)}</span>`:''}</div><p class="pd-desc">${p.desc||''}</p><div class="size-guide" onclick="showToast('Conseil : prenez votre pointure habituelle.')"><i class="fa-solid fa-ruler"></i> Guide des tailles</div>${sizesHtml}<div class="pd-actions"><button class="btn btn-primary" onclick="addDetailProductToCart()"><i class="fa-solid fa-bag-shopping"></i> Ajouter</button><button class="btn btn-whatsapp" onclick="orderDirectWhatsApp(${idx})"><i class="fa-brands fa-whatsapp"></i> Achat Direct</button><button class="btn ${isWish?'btn-danger':'btn-outline'}" onclick="toggleWishlist(${idx})"><i class="fa-solid fa-heart"></i> ${isWish?'Retirer':'Favoris'}</button><button class="btn btn-outline" onclick="toggleCompare(${idx})"><i class="fa-solid fa-arrows-left-right"></i> Comparer</button></div>${p.authCode?`<div style="margin-top:10px;font-size:0.8rem;color:var(--text);opacity:0.6;"><i class="fa-solid fa-qrcode"></i> Code : <strong>${p.authCode}</strong></div>`:''}<div style="margin-top:8px;font-size:0.8rem;color:var(--text);opacity:0.5;">Vues : ${p.views||0} | Stock : ${p.stock||0}</div></div>`;
+      container.innerHTML = galleryHtml + infoHtml;
+      const carouselEl = document.querySelector('.pd-carousel');
+      if (carouselEl && images.length > 1) {
+        let startX=0,startY=0,isSwiping=false;
+        carouselEl.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; startY=e.touches[0].clientY; isSwiping=true; });
+        carouselEl.addEventListener('touchend', e=>{ if(!isSwiping) return; let diffX=startX-e.changedTouches[0].clientX; if(Math.abs(diffX)>30){ if(diffX>0) nextSlide(); else prevSlide(); } isSwiping=false; });
+        carouselEl.addEventListener('touchmove', e=>{ if(!isSwiping) return; let diffX=Math.abs(startX-e.touches[0].clientX); let diffY=Math.abs(startY-e.touches[0].clientY); if(diffX>diffY) e.preventDefault(); }, {passive:false});
+      }
+      renderReviews();
+      renderSimilarProducts(idx);
+    }
+    function goToSlide(index) { const track=document.getElementById('pdCarouselTrack'); const dots=document.querySelectorAll('.pd-carousel-dots .dot'); if(!track) return; if(index<0) index=0; if(index>=detailImagesCount) index=detailImagesCount-1; detailCurrentSlide=index; track.style.transform=`translateX(-${index*100}%)`; dots.forEach((dot,i)=>dot.classList.toggle('active',i===index)); }
+    function nextSlide(){ if(detailCurrentSlide<detailImagesCount-1) goToSlide(detailCurrentSlide+1); else goToSlide(0); }
+    function prevSlide(){ if(detailCurrentSlide>0) goToSlide(detailCurrentSlide-1); else goToSlide(detailImagesCount-1); }
+    function renderSimilarProducts(idx) {
+      const p = appData.products[idx];
+      const similar = appData.products.filter((prod, i) => i !== idx && (prod.category === p.category || prod.brand === p.brand)).slice(0, 4);
+      const grid = document.getElementById('pdSimilarGrid');
+      if (similar.length === 0) { grid.innerHTML = '<p style="grid-column:1/-1;color:var(--text);opacity:0.5;">Aucun produit similaire.</p>'; return; }
+      grid.innerHTML = similar.map(prod => { const i = appData.products.indexOf(prod); const img = prod.images?.[0] || ''; return `<div class="product-card" onclick="viewProductDetail(${i})"><div class="image">${img?`<img src="${img}">`:'<i class="fa-solid fa-box"></i>'}</div><div class="info"><span class="brand">${prod.brand}</span><h3 class="name">${prod.name}</h3><div class="price">${formatPriceCurrency(prod.price)}</div></div></div>`; }).join('');
+    }
+
+    // ============================================================
+    // REVIEWS
+    // ============================================================
+    function renderReviews() { if (currentSelectedDetailProductIdx === null) return; const p = appData.products[currentSelectedDetailProductIdx]; const listDiv = document.getElementById('pd-reviews-list'); const countSpan = document.getElementById('pd-review-count'); if (!p.reviews) p.reviews = []; countSpan.textContent = `(${p.reviews.length})`; if (p.reviews.length === 0) { listDiv.innerHTML = '<p style="color:var(--text);opacity:0.5;font-style:italic;padding:10px 0;">Aucun avis.</p>'; return; } listDiv.innerHTML = p.reviews.map((r, rIdx) => `<div class="review-item"><div class="avatar">${r.author?r.author.charAt(0):'A'}</div><div class="content"><div class="stars">${'<i class="fa-solid fa-star"></i>'.repeat(r.stars)}</div><div><span class="author">${r.author||'Anonyme'}</span><span class="date">${r.date||'Récemment'}</span></div><p>${r.text}</p><div class="actions"><span onclick="likeReview(${rIdx})"><i class="fa-solid fa-thumbs-up ${r.liked?'liked':''}"></i> Utile (${r.likes||0})</span></div></div></div>`).join(''); }
+    function setReviewStars(val) { currentActiveReviewStars = val; document.querySelectorAll('#reviewStarRating i').forEach(i => { const v = parseInt(i.dataset.val); if (v <= val) i.classList.add('active'); else i.classList.remove('active'); }); }
+    async function submitReview() { if (currentSelectedDetailProductIdx === null) return; const author = document.getElementById('r-author').value.trim(); const text = document.getElementById('r-text').value.trim(); if (!text) { showToast("Veuillez rédiger un commentaire."); return; } const newReview = { author: author || "Client Vérifié", stars: currentActiveReviewStars, text, date: new Date().toLocaleDateString('fr-FR'), likes: 0, liked: false }; appData.products[currentSelectedDetailProductIdx].reviews.push(newReview); await persistAppData(); renderReviews(); document.getElementById('r-author').value = ""; document.getElementById('r-text').value = ""; setReviewStars(5); showToast("Merci !"); }
+    async function likeReview(rIdx) { const p = appData.products[currentSelectedDetailProductIdx]; const rev = p.reviews[rIdx]; if (rev.liked) { rev.likes--; rev.liked = false; } else { rev.likes++; rev.liked = true; } await persistAppData(); renderReviews(); }
+
+    // ============================================================
+    // CART & CHECKOUT
+    // ============================================================
+    function toggleCart() { document.getElementById('cartOverlay').classList.toggle('open'); document.getElementById('cartSidebar').classList.toggle('open'); }
+    function fastAddToCart(idx) { const p = appData.products[idx]; if (!p) return; const size = p.sizes?.[0] || "Unique"; const existing = cart.find(item => item.productIdx === idx && item.size === size); if (existing) existing.qty++; else cart.push({ productIdx: idx, size, qty: 1 }); persistCart(); updateCart(); showToast(`${p.name} ajoutée.`); }
+    function addDetailProductToCart() { if (currentSelectedDetailProductIdx === null) return; const p = appData.products[currentSelectedDetailProductIdx]; const sizeSelect = document.getElementById('pd-size-select'); const selectedSize = sizeSelect ? sizeSelect.value : "Unique"; const existing = cart.find(item => item.productIdx === currentSelectedDetailProductIdx && item.size === selectedSize); if (existing) existing.qty++; else cart.push({ productIdx: currentSelectedDetailProductIdx, size: selectedSize, qty: 1 }); persistCart(); updateCart(); showToast(`${p.name} ajoutée.`); }
+    function updateCart() { const container = document.getElementById('cartItemsContainer'); const badge = document.getElementById('cartBadgeCount'); const totalText = document.getElementById('cartTotalPriceText'); let totalQty = 0, totalPrice = 0; if (cart.length === 0) { container.innerHTML = '<p style="color:var(--text);opacity:0.5;text-align:center;padding:30px 0;">Panier vide.</p>'; badge.textContent = "0"; totalText.textContent = "0 FCFA"; return; } container.innerHTML = cart.map((item, cartIdx) => { const p = appData.products[item.productIdx]; if (!p) return ""; totalQty += item.qty; totalPrice += p.price * item.qty; const img = p.images?.[0] || ""; return `<div class="cart-item"><div class="ci-image">${img?`<img src="${img}">`:'<i class="fa-solid fa-box"></i>'}</div><div class="ci-info"><div class="ci-name">${p.name}</div><div style="font-size:0.75rem;opacity:0.6;">Taille: ${item.size}</div><div class="ci-price">${formatPriceCurrency(p.price)}</div><div class="ci-qty"><button onclick="changeCartQty(${cartIdx},-1)">-</button><span>${item.qty}</span><button onclick="changeCartQty(${cartIdx},1)">+</button></div></div><button class="ci-remove" onclick="removeCartItem(${cartIdx})"><i class="fa-solid fa-trash-can"></i></button></div>`; }).join(''); badge.textContent = totalQty; totalText.textContent = formatPriceCurrency(totalPrice); }
+    function changeCartQty(cartIdx, delta) { cart[cartIdx].qty += delta; if (cart[cartIdx].qty <= 0) cart.splice(cartIdx, 1); persistCart(); updateCart(); }
+    function removeCartItem(cartIdx) { cart.splice(cartIdx, 1); persistCart(); updateCart(); }
+    function orderDirectWhatsApp(idx) { const p = appData.products[idx]; const wa = appData.settings?.whatsapp || '2290166316356'; window.open(`https://wa.me/${wa}?text=Bonjour%20Nosbaskets,%20je%20souhaite%20acheter%20*${p.name}*%20(${formatPriceCurrency(p.price)}).`,'_blank'); }
+
+    function openCheckout() {
+      if (cart.length === 0) { showToast('Votre panier est vide.'); return; }
+      const summary = document.getElementById('checkoutSummary');
+      let html = '<div style="font-weight:600;margin-bottom:4px;">Récapitulatif de votre commande</div>';
+      let total = 0;
+      cart.forEach(item => {
+        const p = appData.products[item.productIdx];
+        if (p) {
+          total += p.price * item.qty;
+          html += `<div>${p.name} - Taille ${item.size} (x${item.qty}) : ${formatPriceCurrency(p.price * item.qty)}</div>`;
+        }
+      });
+      html += `<div style="font-weight:700;border-top:1px solid var(--border);padding-top:6px;margin-top:6px;">Total : ${formatPriceCurrency(total)}</div>`;
+      summary.innerHTML = html;
+      document.getElementById('checkout-name').value = '';
+      document.getElementById('checkout-phone').value = '';
+      document.getElementById('checkout-address').value = '';
+      document.getElementById('checkout-email').value = '';
+      document.getElementById('verification-code').value = '';
+      document.getElementById('paymentVerification').classList.remove('active');
+      document.getElementById('checkout-order-id')?.remove();
+      selectPayment('mobile-money');
+      document.getElementById('checkoutModal').classList.add('open');
+    }
+    function closeCheckout() { document.getElementById('checkoutModal').classList.remove('open'); }
+    function selectPayment(method) {
+      selectedPayment = method;
+      document.querySelectorAll('.payment-options button').forEach(b => b.classList.toggle('active', b.dataset.method === method));
+      const details = document.getElementById('paymentDetails');
+      if (method === 'mobile-money') {
+        details.innerHTML = '<p style="color:var(--text);">💳 Paiement Mobile Money : après confirmation, un code de validation vous sera envoyé par email. Entrez-le pour valider le paiement.</p>';
+      } else if (method === 'stripe') {
+        details.innerHTML = '<p style="color:var(--text);">💳 Paiement Stripe : vous serez redirigé vers la page de paiement sécurisée (simulation).</p>';
+      } else if (method === 'cod') {
+        details.innerHTML = '<p style="color:var(--text);">🚚 Paiement à la livraison : vous payez à la réception de votre colis. Disponible uniquement au Bénin.</p>';
+      } else if (method === 'whatsapp') {
+        details.innerHTML = '<p style="color:var(--text);">📱 Confirmation par WhatsApp : un récapitulatif vous sera envoyé sur WhatsApp.</p>';
+      }
+    }
+    function confirmCheckout() {
+      const name = document.getElementById('checkout-name').value.trim();
+      const phone = document.getElementById('checkout-phone').value.trim();
+      const address = document.getElementById('checkout-address').value.trim();
+      const email = document.getElementById('checkout-email').value.trim();
+      if (!name || !phone) { showToast('Veuillez remplir votre nom et téléphone.'); return; }
+
+      let itemsList = '';
+      let total = 0;
+      cart.forEach(item => {
+        const p = appData.products[item.productIdx];
+        if (p) {
+          total += p.price * item.qty;
+          itemsList += `${p.name} (Taille ${item.size}) x${item.qty} = ${formatPriceCurrency(p.price * item.qty)}\n`;
+        }
+      });
+      const paymentLabel = {
+        'mobile-money': 'Mobile Money',
+        'stripe': 'Stripe (simulé)',
+        'cod': 'Paiement à la livraison',
+        'whatsapp': 'Confirmation WhatsApp'
+      }[selectedPayment] || 'Autre';
+
+      const orderId = 'CMD-' + Date.now().toString().slice(-6);
+
+      const newOrder = {
+        id: orderId,
+        client: name,
+        phone: phone,
+        item: itemsList,
+        status: selectedPayment === 'mobile-money' ? 'En attente de paiement' : 
+                selectedPayment === 'cod' ? 'En attente de livraison' :
+                selectedPayment === 'whatsapp' ? 'En attente de confirmation WhatsApp' : 'En attente de confirmation',
+        payment: paymentLabel,
+        note: `Livraison: ${address||'Non précisée'} | Email: ${email||'Non fourni'}`
+      };
+      appData.orders.push(newOrder);
+      persistAppData();
+
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.id = 'checkout-order-id';
+      hiddenInput.value = orderId;
+      document.getElementById('checkoutModal').querySelector('.modal-content').appendChild(hiddenInput);
+
+      if (selectedPayment === 'mobile-money') {
+        const result = simulatePaymentAPI(orderId, total, phone, email);
+        if (result.success) {
+          showToast(`💰 Code de validation envoyé à ${email || 'votre email'}.`);
+          document.getElementById('paymentVerification').classList.add('active');
+          notifyAdmin(newOrder);
+          updateAdminNotifications();
+          renderAdminOrders();
+          updateDashboardStats();
+        }
+      } else if (selectedPayment === 'whatsapp') {
+        const waNumber = appData.settings?.whatsapp || '2290166316356';
+        const msg = `📦 *Nouvelle commande Nosbaskets*\n\n` +
+                    `👤 Client : ${name}\n📞 Téléphone : ${phone}\n📍 Livraison : ${address||'Non précisée'}\n📧 Email : ${email||'Non fourni'}\n\n` +
+                    `📋 *Détails :*\n${itemsList}\n💰 *Total : ${formatPriceCurrency(total)}*\n\n` +
+                    `💳 Paiement : ${paymentLabel}\n🔑 Référence : ${orderId}`;
+        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+        cart = []; persistCart(); updateCart(); closeCheckout();
+        showToast(`Commande ${orderId} envoyée par WhatsApp.`);
+        notifyAdmin(newOrder);
+        updateAdminNotifications();
+        renderAdminOrders();
+        updateDashboardStats();
+      } else if (selectedPayment === 'cod') {
+        cart = []; persistCart(); updateCart(); closeCheckout();
+        showToast(`🚚 Commande ${orderId} en paiement à la livraison.`);
+        notifyAdmin(newOrder);
+        updateAdminNotifications();
+        renderAdminOrders();
+        updateDashboardStats();
+      } else if (selectedPayment === 'stripe') {
+        showToast('💳 Paiement Stripe simulé (démonstration).');
+        setTimeout(() => {
+          newOrder.status = 'Payé';
+          newOrder.payment = 'Stripe (simulé)';
+          persistAppData();
+          cart = []; persistCart(); updateCart(); closeCheckout();
+          showToast('✅ Paiement Stripe accepté (simulation).');
+          notifyAdmin(newOrder);
+          updateAdminNotifications();
+          renderAdminOrders();
+          updateDashboardStats();
+        }, 1500);
+      }
+    }
+
+    function simulatePaymentAPI(orderId, amount, phone, email) {
+      const code = Math.floor(100000 + Math.random() * 900000).toString();
+      verificationCode = code;
+      if (email) {
+        setTimeout(() => {
+          showToast(`📧 Code de validation envoyé à ${email}`);
+          document.getElementById('paymentVerification').classList.add('active');
+        }, 500);
+      }
+      return { success: true, code: code };
+    }
+
+    function verifyPaymentCode() {
+      const inputCode = document.getElementById('verification-code').value.trim();
+      if (inputCode === verificationCode) {
+        showToast('✅ Paiement validé avec succès !');
+        document.getElementById('paymentVerification').classList.remove('active');
+        const orderId = document.getElementById('checkout-order-id')?.value;
+        if (orderId) {
+          const order = appData.orders.find(o => o.id === orderId);
+          if (order) {
+            order.status = 'Payé';
+            order.payment = 'Mobile Money (validé)';
+            persistAppData();
+            renderAdminOrders();
+            updateDashboardStats();
+            updateAdminNotifications();
+            notifyAdmin(order);
+            cart = [];
+            persistCart();
+            updateCart();
+            closeCheckout();
+          }
+        }
+        return true;
+      } else {
+        showToast('❌ Code invalide. Veuillez réessayer.');
+        return false;
+      }
+    }
+
+    function notifyAdmin(order) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('🛍️ Nouvelle commande Nosbaskets', {
+          body: `Commande ${order.id} de ${order.client} - ${order.item.substring(0, 50)}... (${order.payment})`,
+          icon: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%230A3678"/><text x="50%" y="55%" font-family="sans-serif" font-weight="bold" font-size="20" fill="white" text-anchor="middle">N</text></svg>'
+        });
+      }
+      updateAdminNotifications();
+      updateDashboardStats();
+      renderAdminOrders();
+      showToast(`📦 Nouvelle commande ${order.id} reçue !`);
+    }
+
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+
+    // ============================================================
+    // EXPORT CSV
+    // ============================================================
+    function exportOrdersCSV() {
+      if (appData.orders.length === 0) { showToast('Aucune commande.'); return; }
+      let csv = 'ID,Client,Téléphone,Produits,Statut,Note,Date\n';
+      appData.orders.forEach(o => {
+        csv += `${o.id},${o.client},${o.phone},"${o.item}",${o.status},"${o.note||''}",${new Date().toLocaleDateString('fr-FR')}\n`;
+      });
+      downloadCSV(csv, 'commandes_nosbaskets.csv');
+      showToast('Export CSV commandes.');
+    }
+    function exportProductsCSV() {
+      if (appData.products.length === 0) { showToast('Aucun produit.'); return; }
+      let csv = 'Nom,Brand,Catégorie,Prix(FCFA),Stock,SKU,Vues\n';
+      appData.products.forEach(p => {
+        csv += `${p.name},${p.brand},${p.category||''},${p.price},${p.stock||0},${p.sku||''},${p.views||0}\n`;
+      });
+      downloadCSV(csv, 'produits_nosbaskets.csv');
+      showToast('Export CSV produits.');
+    }
+    function downloadCSV(csv, filename) {
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+
+    // ============================================================
+    // BLOG
+    // ============================================================
+    function renderBlogList() {
+      const filter = document.getElementById('blogCategoryFilter').value;
+      let posts = [...appData.blogs];
+      if (filter) posts = posts.filter(p => p.category === filter);
+      const totalPages = Math.ceil(posts.length / BLOG_PER_PAGE);
+      if (blogPage > totalPages) blogPage = totalPages || 1;
+      const start = (blogPage - 1) * BLOG_PER_PAGE;
+      const pagePosts = posts.slice(start, start + BLOG_PER_PAGE);
+      const grid = document.getElementById('blogListGrid');
+      if (pagePosts.length === 0) { grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text);opacity:0.5;padding:40px;">Aucun article.</p>'; } else {
+        grid.innerHTML = pagePosts.map((b, idx) => {
+          const realIdx = appData.blogs.indexOf(b);
+          return `<div class="blog-card"><div class="blog-image">${b.image?`<img src="${b.image}">`:'<i class="fa-solid fa-newspaper"></i>'}${b.category?`<span class="blog-category">${b.category}</span>`:''}</div><div class="blog-content"><div class="blog-meta"><span>${b.date||'Récemment'}</span><span>⏱️ ${b.readTime||'5 min'}</span></div><h3>${b.title}</h3><p>${b.content}</p><button class="btn btn-outline btn-sm" onclick="viewBlogSingle(${realIdx})">Lire</button></div></div>`;
+        }).join('');
+      }
+      const pag = document.getElementById('blogPagination');
+      let pagHtml = '';
+      if (totalPages > 1) {
+        pagHtml += `<button onclick="blogPage=1;renderBlogList();">Premier</button>`;
+        for (let i = 1; i <= totalPages; i++) pagHtml += `<button class="${i===blogPage?'active':''}" onclick="blogPage=${i};renderBlogList();">${i}</button>`;
+        pagHtml += `<button onclick="blogPage=${totalPages};renderBlogList();">Dernier</button>`;
+      }
+      pag.innerHTML = pagHtml;
+    }
+    function viewBlogSingle(idx) {
+      const b = appData.blogs[idx];
+      navigateTo('blog-single');
+      const container = document.getElementById('blogSingleContainer');
+      container.innerHTML = `
+        <h1 style="color:var(--text);">${b.title}</h1>
+        <div class="blog-meta"><span>${b.date||'Aujourd\'hui'}</span><span>Catégorie : ${b.category||'Général'}</span><span>⏱️ ${b.readTime||'5 min'}</span></div>
+        <div class="blog-image">${b.image?`<img src="${b.image}">`:''}</div>
+        <div class="blog-body">${b.content}</div>
+        <div class="blog-share">
+          <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(b.title)}&url=${encodeURIComponent(window.location.href)}" target="_blank"><i class="fa-brands fa-twitter"></i> Twitter</a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+          <a href="https://wa.me/?text=${encodeURIComponent(b.title+' '+window.location.href)}" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="navigateTo('blog')"><i class="fa-solid fa-arrow-left"></i> Retour</button>
+      `;
+    }
+    function generate100BlogPosts() {
+      const titles = [
+        "Guide Nike : L'histoire d'une légende", "Guide Adidas : Du terrain à la rue", "Guide Jordan : La culture du basket",
+        "Guide Asics : Performance et style", "Guide Salomon : L'outdoor chic", "Guide New Balance : Made in USA",
+        "Comment choisir sa pointure de sneakers ?", "Comment nettoyer ses sneakers ?", "Comment éviter les contrefaçons ?",
+        "Les sneakers comme investissement", "Top 10 des sneakers les plus chères", "Les tendances sneakers 2026",
+        "Les collaborations les plus rares", "Nike Air Max : Une révolution", "Yeezy : La saga Kanye West",
+        "Les sneakers et le streetwear", "Le retour des 90's", "Les sneakers de luxe", "Les sneakers éco-responsables",
+        "Comment lacer ses sneakers ?", "Les sneakers les plus confortables", "Les sneakers les plus légères",
+        "Les sneakers les plus durables", "Les sneakers les plus iconiques", "Les sneakers de A à Z",
+        "L'avenir des sneakers", "Les sneakers et la technologie", "Les sneakers et l'art", "Les sneakers et la musique",
+        "Les sneakers et le sport", "Les sneakers et la mode", "Les sneakers et la culture pop"
+      ];
+      const categories = ['Guides', 'Actualités', 'Culture', 'Collaborations', 'Histoire'];
+      const contents = [
+        "Dans cet article, nous explorons en profondeur l'univers des sneakers. Découvrez les secrets de fabrication, les technologies innovantes, et l'impact culturel de ces chaussures devenues iconiques. Un guide complet pour tous les passionnés.",
+        "Plongez dans l'histoire fascinante de cette marque légendaire. Des débuts modestes aux collaborations les plus prestigieuses, retracez le parcours qui a fait de cette sneaker un symbole de style et d'innovation.",
+        "Que vous soyez un collectionneur averti ou un néophyte, cet article vous donnera toutes les clés pour comprendre l'engouement autour des sneakers. Analyse des tendances, conseils d'achat, et coulisses du marché."
+      ];
+      for (let i = 0; i < 100; i++) {
+        const title = titles[i % titles.length] + (i > 30 ? ` #${i}` : '');
+        const category = categories[i % categories.length];
+        const content = contents[i % contents.length] + ' ' + contents[(i+1) % contents.length];
+        const readTime = (3 + Math.floor(Math.random() * 10)) + ' min';
+        appData.blogs.push({
+          title, category, content, readTime,
+          image: null,
+          date: new Date(Date.now() - (i * 86400000)).toLocaleDateString('fr-FR')
+        });
+      }
+      persistAppData();
+      renderAdminBlog();
+      renderBlogList();
+      showToast('100 articles générés !');
+    }
+
+    // ============================================================
+    // QR CODE
+    // ============================================================
+    function initQRScanner() { if (!document.getElementById('qr-reader')) return; stopQRScanner(); }
+    function toggleQRScanner() { const wrap = document.getElementById('qr-scanner-container'); const btn = document.getElementById('toggleScannerBtn'); if (wrap.style.display === 'none') { wrap.style.display = 'block'; btn.innerHTML = '<i class="fa-solid fa-camera-rotate"></i> Arrêter'; html5QrScanner = new Html5Qrcode("qr-reader"); html5QrScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, decodedText => { document.getElementById('manualTrackingID').value = decodedText; checkManualTracking(); toggleQRScanner(); }, () => {}).catch(err => { showToast("Impossible d'accéder à la caméra."); wrap.style.display = 'none'; btn.innerHTML = '<i class="fa-solid fa-camera"></i> Ouvrir'; }); } else { stopQRScanner(); wrap.style.display = 'none'; btn.innerHTML = '<i class="fa-solid fa-camera"></i> Ouvrir'; } }
+    function stopQRScanner() { if (html5QrScanner) { try { html5QrScanner.stop().then(() => { html5QrScanner = null; }); } catch (e) { html5QrScanner = null; } } }
+    function checkManualTracking() { const id = document.getElementById('manualTrackingID').value.trim().toUpperCase(); const resDiv = document.getElementById('qr-result'); if (!id) { showToast("Saisissez un ID."); return; } const order = appData.orders.find(o => o.id === id); resDiv.style.display = 'block'; if (!order) { resDiv.innerHTML = `<div style="color:#e74c3c;"><i class="fa-solid fa-circle-exclamation"></i> Code inconnu</div><p style="font-size:0.8rem;opacity:0.6;">Aucun colis pour ${id}.</p>`; return; } resDiv.innerHTML = `<div style="color:var(--blue);font-weight:700;">Expédition ${order.id}</div><div style="text-align:left;font-size:0.85rem;"><div><strong>Client :</strong> ${order.client}</div><div><strong>Produit :</strong> ${order.item}</div><div style="background:var(--blue);color:#fff;padding:6px;border-radius:6px;text-align:center;">Statut : ${order.status}</div>${order.note?`<div style="font-style:italic;opacity:0.6;font-size:0.8rem;">Note : ${order.note}</div>`:''}</div>`; }
+    function toggleVerifyQRScanner() { const wrap = document.getElementById('verify-qr-scanner-container'); const btn = document.getElementById('toggleVerifyScannerBtn'); if (wrap.style.display === 'none') { wrap.style.display = 'block'; btn.innerHTML = '<i class="fa-solid fa-camera-rotate"></i> Arrêter'; html5QrVerifyScanner = new Html5Qrcode("verify-qr-reader"); html5QrVerifyScanner.start({ facingMode: "environment" }, { fps: 10, qrbox: { width: 250, height: 250 } }, decodedText => { document.getElementById('manualVerifyCode').value = decodedText; checkManualVerify(); toggleVerifyQRScanner(); }, () => {}).catch(err => { showToast("Impossible d'accéder à la caméra."); wrap.style.display = 'none'; btn.innerHTML = '<i class="fa-solid fa-camera"></i> Ouvrir'; }); } else { stopVerifyQRScanner(); wrap.style.display = 'none'; btn.innerHTML = '<i class="fa-solid fa-camera"></i> Ouvrir'; } }
+    function stopVerifyQRScanner() { if (html5QrVerifyScanner) { try { html5QrVerifyScanner.stop().then(() => { html5QrVerifyScanner = null; }); } catch (e) { html5QrVerifyScanner = null; } } }
+    function checkManualVerify() { const code = document.getElementById('manualVerifyCode').value.trim(); const resDiv = document.getElementById('verify-result'); if (!code) { showToast("Saisissez un code."); return; } const product = appData.products.find(p => p.authCode && p.authCode.toUpperCase() === code.toUpperCase()); resDiv.style.display = 'block'; if (!product) { resDiv.innerHTML = '<div style="color:#e74c3c;"><i class="fa-solid fa-circle-exclamation"></i> Code non reconnu</div><p style="font-size:0.9rem;opacity:0.6;">Aucune sneaker correspondante.</p>'; return; } const img = product.images?.[0] || ''; resDiv.innerHTML = `<div style="display:flex;gap:12px;align-items:center;">${img?`<img src="${img}" style="width:60px;height:60px;object-fit:contain;border-radius:8px;">`:''}<div><div style="font-weight:700;">${product.name}</div><div style="opacity:0.6;font-size:0.85rem;">${product.brand}</div></div></div><div style="background:#d4edda;color:#155724;padding:10px;border-radius:8px;margin-top:8px;"><i class="fa-solid fa-check-circle"></i> <strong>Authentique</strong> — Certifié.</div><div style="margin-top:8px;font-size:0.85rem;opacity:0.6;">Code : ${product.authCode} — Prix : ${formatPriceCurrency(product.price)}</div>`; }
+
+    // ============================================================
+    // CONTACT, ABOUT, FOOTER
+    // ============================================================
+    function submitContactForm() { const n = document.getElementById('ct-name').value; const e = document.getElementById('ct-email').value; const m = document.getElementById('ct-msg').value; if (!n || !e || !m) { showToast("Veuillez remplir tous les champs."); return; } showToast("Message envoyé !"); document.getElementById('ct-name').value = ""; document.getElementById('ct-email').value = ""; document.getElementById('ct-msg').value = ""; }
+    function renderFooterCategories() {
+      const ul = document.getElementById('footerCategories');
+      ul.innerHTML = appData.categories.slice(0, 6).map(c => `<li><a href="#" onclick="navigateTo('shop');filterByCatAndGo('${c.name}')">${c.name}</a></li>`).join('');
+    }
+
+    // ============================================================
+    // ADMIN PANEL - TÉMOIGNAGES
+    // ============================================================
+    async function saveTestimonial() {
+      const name = document.getElementById('t-name').value.trim();
+      const role = document.getElementById('t-role').value.trim();
+      const stars = parseInt(document.getElementById('t-stars').value);
+      const text = document.getElementById('t-text').value.trim();
+      if (!name || !text) { showToast("Nom et texte requis."); return; }
+      const editIdx = document.getElementById('edit-testimonial-idx').value;
+      const testimonial = { name, role, stars, text, image: tempUploadedTestimonialImg || "" };
+      if (editIdx !== "") {
+        appData.testimonials[parseInt(editIdx)] = testimonial;
+        showToast("Témoignage mis à jour.");
+      } else {
+        appData.testimonials.push(testimonial);
+        showToast("Témoignage ajouté.");
+      }
+      await persistAppData();
+      resetTestimonialForm();
+      renderAdminTestimonials();
+      renderTestimonials();
+    }
+    function resetTestimonialForm() {
+      document.getElementById('t-name').value = "";
+      document.getElementById('t-role').value = "";
+      document.getElementById('t-text').value = "";
+      document.getElementById('t-stars').value = "5";
+      document.getElementById('edit-testimonial-idx').value = "";
+      document.getElementById('testimonialFormTitle').textContent = "Ajouter un témoignage";
+      document.getElementById('testimonialFormBtn').textContent = "Enregistrer";
+      document.getElementById('cancelEditTestimonialBtn').style.display = "none";
+      tempUploadedTestimonialImg = "";
+      document.getElementById('t-img-preview').innerHTML = "";
+      document.getElementById('t-img-file').value = "";
+    }
+    function renderAdminTestimonials() {
+      const tbody = document.getElementById('adminTestimonialsTable');
+      if (!tbody) return;
+      tbody.innerHTML = appData.testimonials.map((t, idx) => {
+        const stars = '★'.repeat(t.stars) + '☆'.repeat(5 - t.stars);
+        const img = t.image ? `<img src="${t.image}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;">` : '';
+        return `<tr>
+          <td>${img || '-'}</td>
+          <td>${t.name}</td>
+          <td>${t.role || ''}</td>
+          <td>${stars}</td>
+          <td style="max-width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">"${t.text}"</td>
+          <td><button class="btn-primary" onclick="editTestimonial(${idx})">Modifier</button><button class="btn-danger" onclick="deleteTestimonial(${idx})">Supprimer</button></td>
+        </tr>`;
+      }).join('');
+    }
+    function editTestimonial(idx) {
+      const t = appData.testimonials[idx];
+      document.getElementById('t-name').value = t.name;
+      document.getElementById('t-role').value = t.role || "";
+      document.getElementById('t-text').value = t.text;
+      document.getElementById('t-stars').value = t.stars;
+      document.getElementById('edit-testimonial-idx').value = idx;
+      document.getElementById('testimonialFormTitle').textContent = "Modifier le témoignage";
+      document.getElementById('testimonialFormBtn').textContent = "Mettre à jour";
+      document.getElementById('cancelEditTestimonialBtn').style.display = "inline-block";
+      if (t.image) {
+        tempUploadedTestimonialImg = t.image;
+        document.getElementById('t-img-preview').innerHTML = `<div class="img-wrapper"><img src="${t.image}"></div>`;
+      } else {
+        tempUploadedTestimonialImg = "";
+        document.getElementById('t-img-preview').innerHTML = "";
+      }
+    }
+    async function deleteTestimonial(idx) {
+      if (confirm("Supprimer ce témoignage ?")) {
+        appData.testimonials.splice(idx, 1);
+        await persistAppData();
+        renderAdminTestimonials();
+        renderTestimonials();
+        showToast("Témoignage supprimé.");
+      }
+    }
+    function handleTestimonialImgUpload(e) {
+      readFilesAsBase64(e.target.files, function(arr) {
+        if (arr.length > 0) {
+          tempUploadedTestimonialImg = arr[0];
+          document.getElementById('t-img-preview').innerHTML = `<div class="img-wrapper"><img src="${tempUploadedTestimonialImg}"></div>`;
+        }
+      });
+    }
+
+    // ============================================================
+    // ADMIN PANEL - AUTRES
+    // ============================================================
+    document.addEventListener('click', function(e) {
+      const menuItem = e.target.closest('.admin-menu li');
+      if (menuItem && menuItem.dataset.tab) {
+        document.querySelectorAll('.admin-menu li').forEach(li => li.classList.remove('active'));
+        menuItem.classList.add('active');
+        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('tab-' + menuItem.dataset.tab).classList.add('active');
+      }
+    });
+    function updateDashboardStats() {
+      document.getElementById('statOrders').textContent = appData.orders.length;
+      document.getElementById('statProducts').textContent = appData.products.length;
+      document.getElementById('statWishlist').textContent = wishlist.length;
+      let totalRevenue = 0;
+      appData.orders.forEach(o => {
+        const match = o.item.match(/Total : ([\d\s]+) FCFA/);
+        if (match) totalRevenue += parseInt(match[1].replace(/\s/g,''));
+      });
+      document.getElementById('statRevenue').textContent = formatPriceCurrency(totalRevenue || appData.products.reduce((sum, p) => sum + p.price, 0));
+      updateAdminNotifications();
+    }
+    function updateAdminNotifications() {
+      const pending = appData.orders.filter(o => o.status === 'En attente de paiement' || o.status === 'En attente de confirmation' || o.status === 'En attente de confirmation WhatsApp').length;
+      pendingOrdersCount = pending;
+      const badge = document.getElementById('adminNotifBadge');
+      const orderBadge = document.getElementById('adminOrderBadge');
+      if (pending > 0) {
+        badge.style.display = 'inline';
+        badge.textContent = pending;
+        orderBadge.style.display = 'inline';
+        orderBadge.textContent = pending;
+      } else {
+        badge.style.display = 'none';
+        orderBadge.style.display = 'none';
+      }
+      document.getElementById('statPendingOrders').textContent = pending;
+    }
+    function openLoginModal() { if (adminLoggedIn) { document.getElementById('adminPanel').style.display = 'block'; window.scrollTo({ top: document.getElementById('adminPanel').offsetTop - 20, behavior: 'smooth' }); } else document.getElementById('loginOverlay').classList.add('open'); }
+    function closeLoginModal() { document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('adminPasswordInput').value = ""; document.getElementById('loginErrorMsg').textContent = ""; }
+    async function submitAdminLogin() { const pass = document.getElementById('adminPasswordInput').value; if (pass === 'admin123') { adminLoggedIn = true; document.getElementById('adminPanel').style.display = 'block'; closeLoginModal(); showToast("Connexion validée."); populateSelects(); renderAdminProducts(); renderAdminCategories(); renderAdminBrands(); renderAdminBlog(); renderAdminOrders(); renderAdminInstagram(); renderAdminBanners(); loadSettingsToForm(); loadLogoToForm(); renderMediaLibrary(); updateDashboardStats(); updateAdminNotifications(); renderAdminTestimonials(); } else { document.getElementById('loginErrorMsg').textContent = "Mot de passe incorrect."; } }
+    function logoutAdmin() { adminLoggedIn = false; document.getElementById('adminPanel').style.display = 'none'; showToast("Déconnecté."); navigateTo('home'); }
+    function populateSelects() { const pBrand = document.getElementById('p-brand-select'); const pCat = document.getElementById('p-cat-select'); if (!pBrand || !pCat) return; pBrand.innerHTML = appData.brands.map(b => `<option value="${b.name}">${b.name}</option>`).join(''); pCat.innerHTML = appData.categories.map(c => `<option value="${c.name}">${c.name}</option>`).join(''); }
+
+    // File encoders
+    function readFilesAsBase64(files, callback) { let encoded = []; let counter = 0; if (files.length === 0) { callback([]); return; } for (let i = 0; i < files.length; i++) { const reader = new FileReader(); reader.onload = function(e) { encoded.push(e.target.result); counter++; if (counter === files.length) callback(encoded); }; reader.readAsDataURL(files[i]); } }
+    function handleProductImgUpload(e) { readFilesAsBase64(e.target.files, function(base64Strings) { tempUploadedProductImgs = tempUploadedProductImgs.concat(base64Strings); renderTempProductImgs(); }); }
+    function renderTempProductImgs() { const p = document.getElementById('p-img-preview'); p.innerHTML = tempUploadedProductImgs.map((img, idx) => `<div class="img-wrapper"><img src="${img}"><span class="remove-img" onclick="removeTempProductImg(${idx})">&times;</span></div>`).join(''); }
+    function removeTempProductImg(idx) { tempUploadedProductImgs.splice(idx, 1); renderTempProductImgs(); }
+    function handleBrandImgUpload(e) { readFilesAsBase64(e.target.files, function(arr) { if (arr.length > 0) { tempUploadedBrandImg = arr[0]; document.getElementById('b-img-preview').innerHTML = `<div class="img-wrapper"><img src="${tempUploadedBrandImg}"></div>`; } }); }
+    function handleBlogImgUpload(e) { readFilesAsBase64(e.target.files, function(arr) { if (arr.length > 0) { tempUploadedBlogImg = arr[0]; document.getElementById('bl-img-preview').innerHTML = `<div class="img-wrapper"><img src="${tempUploadedBlogImg}"></div>`; } }); }
+    function handleBannerUpload(e) { readFilesAsBase64(e.target.files, function(arr) { if (arr.length > 0) { tempUploadedBannerImg = arr[0]; document.getElementById('banner-img-preview').innerHTML = `<div class="img-wrapper"><img src="${tempUploadedBannerImg}"></div>`; } }); }
+    function handleSiteLogoUpload(e) { readFilesAsBase64(e.target.files, function(arr) { if (arr.length > 0) { tempUploadedLogoImg = arr[0]; document.getElementById('cfg-logo-preview').innerHTML = `<div class="img-wrapper"><img src="${tempUploadedLogoImg}"></div>`; } }); }
+    function removeSiteLogo() { tempUploadedLogoImg = ""; document.getElementById('cfg-logo-preview').innerHTML = ""; document.getElementById('cfg-logo-img').value = ""; updateSiteLogo(); }
+    function handleMediaUpload(e) { const files = e.target.files; for (let f of files) { const reader = new FileReader(); reader.onload = function(ev) { mediaLibrary.push(ev.target.result); localStorage.setItem('nosbaskets_media', JSON.stringify(mediaLibrary)); renderMediaLibrary(); }; reader.readAsDataURL(f); } e.target.value = ''; }
+    function deleteMedia(idx) { if (confirm('Supprimer ?')) { mediaLibrary.splice(idx, 1); localStorage.setItem('nosbaskets_media', JSON.stringify(mediaLibrary)); renderMediaLibrary(); showToast('Image supprimée'); } }
+    function copyMediaUrl(idx) { navigator.clipboard.writeText(mediaLibrary[idx]).then(() => showToast('URL copiée !')); }
+    function renderMediaLibrary() { const grid = document.getElementById('mediaGrid'); if (!grid) return; if (mediaLibrary.length === 0) { grid.innerHTML = '<p style="grid-column:1/-1;color:var(--text);opacity:0.5;">Aucune image.</p>'; return; } grid.innerHTML = mediaLibrary.map((img, idx) => `<div class="media-item"><img src="${img}"><div class="media-actions"><button onclick="copyMediaUrl(${idx})"><i class="fa-regular fa-copy"></i></button><button onclick="deleteMedia(${idx})"><i class="fa-regular fa-trash-can"></i></button></div></div>`).join(''); }
+
+    // CRUD Products
+    async function saveProductForm() { const name = document.getElementById('p-name').value.trim(); const brand = document.getElementById('p-brand-select').value; const category = document.getElementById('p-cat-select').value; const badge = document.getElementById('p-badge').value; const price = parseFloat(document.getElementById('p-price').value); const oldPrice = parseFloat(document.getElementById('p-oldprice').value) || null; const sku = document.getElementById('p-sku').value.trim(); const stock = parseInt(document.getElementById('p-stock').value) || 0; const desc = document.getElementById('p-desc').value.trim(); let authCode = document.getElementById('p-authcode').value.trim(); const sizes = []; document.querySelectorAll('input[name="p-sizes-chk"]:checked').forEach(c => sizes.push(c.value)); if (!name || !brand || !category || isNaN(price)) { showToast("Champs obligatoires."); return; } if (!authCode) { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; let code = 'AUTH-'; for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length)); authCode = code; document.getElementById('p-authcode').value = authCode; } const editIdxStr = document.getElementById('edit-product-idx').value; if (editIdxStr !== "") { const idx = parseInt(editIdxStr); const oldP = appData.products[idx]; oldP.name = name; oldP.brand = brand; oldP.category = category; oldP.badge = badge; oldP.price = price; oldP.oldPrice = oldPrice; oldP.sku = sku; oldP.stock = stock; oldP.desc = desc; oldP.sizes = sizes; oldP.authCode = authCode; if (tempUploadedProductImgs.length > 0) oldP.images = tempUploadedProductImgs; showToast("Produit mis à jour."); } else { const newP = { name, brand, category, badge, price, oldPrice, sku, stock, desc, sizes, images: tempUploadedProductImgs.length ? tempUploadedProductImgs : [], reviews: [], authCode, views: 0, sold: 0 }; appData.products.push(newP); showToast("Produit créé."); } await persistAppData(); resetProductForm(); renderAdminProducts(); renderHome(); renderShop(); renderWishlist(); renderComparator(); updateDashboardStats(); }
+    function resetProductForm() { document.getElementById('p-name').value = ""; document.getElementById('p-price').value = ""; document.getElementById('p-oldprice').value = ""; document.getElementById('p-desc').value = ""; document.getElementById('edit-product-idx').value = ""; document.getElementById('p-badge').value = ""; document.getElementById('p-authcode').value = ""; document.getElementById('p-sku').value = ""; document.getElementById('p-stock').value = "10"; document.getElementById('productFormTitle').textContent = "Ajouter un produit"; document.getElementById('productFormBtn').textContent = "Enregistrer"; document.getElementById('cancelEditProductBtn').style.display = "none"; document.querySelectorAll('input[name="p-sizes-chk"]').forEach(c => c.checked = false); tempUploadedProductImgs = []; document.getElementById('p-img-preview').innerHTML = ""; document.getElementById('p-img-file').value = ""; }
+    function renderAdminProducts() { const tbody = document.getElementById('adminProductsTable'); tbody.innerHTML = appData.products.map((p, idx) => `<tr><td><img src="${p.images?.[0]||''}" style="width:40px;height:40px;object-fit:contain;"></td><td><strong>${p.name}</strong></td><td>${formatPriceCurrency(p.price)}</td><td><span class="stock-badge ${p.stock>5?'in-stock':p.stock>0?'low-stock':'out-of-stock'}">${p.stock||0}</span></td><td>${p.views||0}</td><td><button class="btn-primary" onclick="editProduct(${idx})">Modifier</button><button class="btn-danger" onclick="deleteProduct(${idx})">Supprimer</button></td></tr>`).join(''); }
+    function editProduct(idx) { const p = appData.products[idx]; document.getElementById('p-name').value = p.name; document.getElementById('p-brand-select').value = p.brand; document.getElementById('p-cat-select').value = p.category; document.getElementById('p-badge').value = p.badge || ""; document.getElementById('p-price').value = p.price; document.getElementById('p-oldprice').value = p.oldPrice || ""; document.getElementById('p-sku').value = p.sku || ""; document.getElementById('p-stock').value = p.stock || 0; document.getElementById('p-desc').value = p.desc || ""; document.getElementById('p-authcode').value = p.authCode || ""; document.getElementById('edit-product-idx').value = idx; document.querySelectorAll('input[name="p-sizes-chk"]').forEach(chk => { chk.checked = p.sizes ? p.sizes.includes(chk.value) : false; }); tempUploadedProductImgs = p.images || []; renderTempProductImgs(); document.getElementById('productFormTitle').textContent = "Modifier"; document.getElementById('productFormBtn').textContent = "Mettre à jour"; document.getElementById('cancelEditProductBtn').style.display = "inline-block"; }
+    async function deleteProduct(idx) { if (confirm("Supprimer ?")) { appData.products.splice(idx, 1); await persistAppData(); renderAdminProducts(); renderHome(); renderShop(); renderWishlist(); renderComparator(); updateDashboardStats(); } }
+
+    async function addCategory() { const name = document.getElementById('c-name').value.trim(); const icon = document.getElementById('c-icon').value.trim(); if (!name) return; appData.categories.push({ name, icon }); await persistAppData(); document.getElementById('c-name').value = ""; renderAdminCategories(); populateSelects(); renderHome(); renderFooterCategories(); }
+    function renderAdminCategories() { document.getElementById('adminCategoriesTable').innerHTML = appData.categories.map((c, idx) => `<tr><td><i class="fa-solid ${c.icon}"></i></td><td>${c.name}</td><td><button class="btn-danger" onclick="deleteCategory(${idx})">Supprimer</button></td></tr>`).join(''); }
+    async function deleteCategory(idx) { appData.categories.splice(idx, 1); await persistAppData(); renderAdminCategories(); populateSelects(); renderHome(); renderFooterCategories(); }
+    async function addBrand() { const name = document.getElementById('b-name').value.trim(); if (!name) return; appData.brands.push({ name, image: tempUploadedBrandImg }); await persistAppData(); document.getElementById('b-name').value = ""; tempUploadedBrandImg = ""; document.getElementById('b-img-preview').innerHTML = ""; document.getElementById('b-img-file').value = ""; renderAdminBrands(); populateSelects(); renderHome(); }
+    function renderAdminBrands() { document.getElementById('adminBrandsTable').innerHTML = appData.brands.map((b, idx) => `<tr><td><img src="${b.image}" style="height:24px;"></td><td>${b.name}</td><td><button class="btn-danger" onclick="deleteBrand(${idx})">Supprimer</button></td></tr>`).join(''); }
+    async function deleteBrand(idx) { appData.brands.splice(idx, 1); await persistAppData(); renderAdminBrands(); populateSelects(); renderHome(); }
+    async function addBlogPost() { const title = document.getElementById('bl-title').value.trim(); const category = document.getElementById('bl-category').value; const content = document.getElementById('bl-content').value.trim(); if (!title || !content) return; const readTime = Math.ceil(content.split(' ').length / 200) + ' min'; appData.blogs.push({ title, category, content, image: tempUploadedBlogImg, date: new Date().toLocaleDateString('fr-FR'), readTime }); await persistAppData(); document.getElementById('bl-title').value = ""; document.getElementById('bl-content').value = ""; tempUploadedBlogImg = ""; document.getElementById('bl-img-preview').innerHTML = ""; document.getElementById('bl-img-file').value = ""; renderAdminBlog(); renderBlogList(); }
+    function renderAdminBlog() { document.getElementById('adminBlogTable').innerHTML = appData.blogs.map((b, idx) => `<tr><td><img src="${b.image}" style="width:40px;"></td><td>${b.title}</td><td>${b.category||'Général'}</td><td>${b.date}</td><td><button class="btn-danger" onclick="deleteBlogPost(${idx})">Supprimer</button></td></tr>`).join(''); }
+    async function deleteBlogPost(idx) { appData.blogs.splice(idx, 1); await persistAppData(); renderAdminBlog(); renderBlogList(); }
+    async function saveOrderForm() { const client = document.getElementById('o-client').value.trim(); const phone = document.getElementById('o-phone').value.trim(); const item = document.getElementById('o-item').value.trim(); const status = document.getElementById('o-status').value; const note = document.getElementById('o-note').value.trim(); if (!client || !phone || !item) { showToast("Champs requis."); return; } const editIdxStr = document.getElementById('edit-order-idx').value; if (editIdxStr !== "") { const idx = parseInt(editIdxStr); const o = appData.orders[idx]; o.client = client; o.phone = phone; o.item = item; o.status = status; o.note = note; showToast("Commande mise à jour."); } else { const uniqueID = "NB-" + Math.floor(1000 + Math.random() * 9000) + "-" + String.fromCharCode(65 + Math.floor(Math.random() * 26)); appData.orders.push({ id: uniqueID, client, phone, item, status, note }); showToast(`Commande ${uniqueID} enregistrée.`); } await persistAppData(); resetOrderForm(); renderAdminOrders(); updateDashboardStats(); updateAdminNotifications(); }
+    function resetOrderForm() { document.getElementById('o-client').value = ""; document.getElementById('o-phone').value = ""; document.getElementById('o-item').value = ""; document.getElementById('o-note').value = ""; document.getElementById('edit-order-idx').value = ""; document.getElementById('orderFormBtn').textContent = "Enregistrer"; document.getElementById('cancelEditOrderBtn').style.display = "none"; }
+    function renderAdminOrders() { document.getElementById('adminOrdersTable').innerHTML = appData.orders.map((o, idx) => `<tr><td><strong>${o.id}</strong></td><td>${o.client}</td><td>${o.item}</td><td><span style="background:#eee;padding:2px 6px;border-radius:4px;font-size:0.75rem;">${o.status}</span></td><td>${o.payment||'Non spécifié'}</td><td><button class="btn-primary" onclick="editOrder(${idx})">Éditer</button><button class="btn-danger" onclick="deleteOrder(${idx})">Supprimer</button></td></tr>`).join(''); }
+    function editOrder(idx) { const o = appData.orders[idx]; document.getElementById('o-client').value = o.client; document.getElementById('o-phone').value = o.phone; document.getElementById('o-item').value = o.item; document.getElementById('o-status').value = o.status; document.getElementById('o-note').value = o.note || ""; document.getElementById('edit-order-idx').value = idx; document.getElementById('orderFormBtn').textContent = "Mettre à jour"; document.getElementById('cancelEditOrderBtn').style.display = "inline-block"; }
+    async function deleteOrder(idx) { if (confirm("Supprimer ?")) { appData.orders.splice(idx, 1); await persistAppData(); renderAdminOrders(); updateDashboardStats(); updateAdminNotifications(); } }
+    async function addInstaPost() { if (!tempUploadedInstaImg) return; appData.instagram.push(tempUploadedInstaImg); await persistAppData(); tempUploadedInstaImg = ""; document.getElementById('insta-img-preview').innerHTML = ""; document.getElementById('insta-img-file').value = ""; renderAdminInstagram(); renderHome(); }
+    function renderAdminInstagram() { document.getElementById('adminInstaTable').innerHTML = appData.instagram.map((img, idx) => `<tr><td><img src="${img}" style="width:40px;height:40px;object-fit:cover;"></td><td><button class="btn-danger" onclick="deleteInstaPost(${idx})">Supprimer</button></td></tr>`).join(''); }
+    async function deleteInstaPost(idx) { appData.instagram.splice(idx, 1); await persistAppData(); renderAdminInstagram(); renderHome(); }
+    async function addBanner() { if (!tempUploadedBannerImg) return; appData.banners.push(tempUploadedBannerImg); await persistAppData(); tempUploadedBannerImg = ""; document.getElementById('banner-img-preview').innerHTML = ""; document.getElementById('banner-img-file').value = ""; renderAdminBanners(); renderCarousel(); renderHome(); }
+    function renderAdminBanners() { document.getElementById('adminBannersTable').innerHTML = appData.banners.map((img, idx) => `<tr><td><img src="${img}" style="height:30px;"></td><td><button class="btn-danger" onclick="deleteBanner(${idx})">Supprimer</button></td></tr>`).join(''); }
+    async function deleteBanner(idx) { appData.banners.splice(idx, 1); await persistAppData(); renderAdminBanners(); renderCarousel(); renderHome(); }
+    async function saveSettings() {
+      const whatsapp = document.getElementById('cfg-whatsapp').value.trim();
+      const flashMsg = document.getElementById('cfg-flash').value.trim();
+      const apiKey = document.getElementById('cfg-api-key').value.trim();
+      const apiSecret = document.getElementById('cfg-api-secret').value.trim();
+      if (!whatsapp) return;
+      if (tempUploadedLogoImg) { appData.settings.logo = tempUploadedLogoImg; tempUploadedLogoImg = ""; document.getElementById('cfg-logo-preview').innerHTML = ""; document.getElementById('cfg-logo-img').value = ""; updateSiteLogo(); }
+      appData.settings.whatsapp = whatsapp;
+      appData.settings.flashMsg = flashMsg || 'Livraison gratuite de vos sneakers préférées partout au Bénin !';
+      appData.settings.apiKey = apiKey;
+      appData.settings.apiSecret = apiSecret;
+      await persistAppData();
+      showToast("Configurations enregistrées.");
+      renderHome();
+    }
+    function loadSettingsToForm() {
+      document.getElementById('cfg-whatsapp').value = appData.settings?.whatsapp || '2290166316356';
+      document.getElementById('cfg-flash').value = appData.settings?.flashMsg || '';
+      document.getElementById('cfg-api-key').value = appData.settings?.apiKey || '';
+      document.getElementById('cfg-api-secret').value = appData.settings?.apiSecret || '';
+    }
+    function loadLogoToForm() { if (appData.settings?.logo) document.getElementById('cfg-logo-preview').innerHTML = `<div class="img-wrapper"><img src="${appData.settings.logo}"></div>`; }
+    function updateSiteLogo() { const url = appData.settings?.logo || null; const headerImg = document.getElementById('headerLogoImg'); const footerImg = document.getElementById('footerLogoImg'); const fallback = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%230A3678'/><text x='50%27 y='55%27 font-family='sans-serif' font-weight='bold' font-size='20' fill='white' text-anchor='middle'>N</text></svg>"; headerImg.src = url || fallback; footerImg.src = url || fallback; }
+
+    // Toast
+    let toastTimeout;
+    function showToast(msg) { const toast = document.getElementById('toast'); toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastTimeout); toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 4000); }
+
+    // INIT
+    document.addEventListener('DOMContentLoaded', () => {
+      generateSizeCheckboxes();
+      loadAllData().then(() => {
+        console.log('✅ Nosbaskets V5 — API PHP (AlwaysData)');
+        console.log('🔑 admin123');
+        if (appData.blogs.length === 0) {
+          setTimeout(() => generate100BlogPosts(), 500);
+        }
+        updateAdminNotifications();
+        setReviewStars(5); // initialisation des étoiles
+      });
+    });
+  </script>
+</body>
+</html>
